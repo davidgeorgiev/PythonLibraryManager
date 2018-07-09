@@ -125,3 +125,81 @@ class DataBaseConnector():
         cur.execute("UPDATE `loan` SET `user_id` = "+dataList[0]+", `book_id` = "+dataList[1]+", `loan_date` = "+dataList[2]+", `return_period` = "+dataList[3]+", `is_returned` = "+dataList[4]+", `returned_on_date` = "+dataList[5]+" WHERE id = "+str(id)+";")
         self.db.commit()
         cur.close()
+
+    def AddGenre(self,dataList):
+        cur = self.db.cursor()
+        cur.execute("INSERT INTO `genre` (`name`) VALUES ("+dataList[0]+");")
+        self.db.commit()
+        cur.close()
+    def GetGenreInfo(self,id):
+        cur = self.db.cursor()
+        cur.execute("SELECT * FROM `genre` WHERE `id` = "+str(id)+";")
+        for row in cur.fetchall():
+            self.lastResult = [str(row[0])]
+        return self.lastResult
+    def DeleteGenre(self,id):
+        cur = self.db.cursor()
+        cur.execute("DELETE FROM `genre` WHERE `id` = "+str(id)+";")
+        self.db.commit()
+        cur.close()
+    def EditGenre(self,id,dataList):
+        cur = self.db.cursor()
+        cur.execute("UPDATE `genre` SET `name` = "+dataList[0]+" WHERE id = "+str(id)+";")
+        self.db.commit()
+        cur.close()
+
+    def AddBookAuthor(self,book_id,author_id):
+        cur = self.db.cursor()
+        cur.execute("INSERT INTO `book_author` (`author_id`,`book_id`) VALUES ("+str(author_id)+ "," + str(book_id)+");")
+        self.db.commit()
+        cur.close()
+    def GetBookByAuthorId(self,author_id):
+        cur = self.db.cursor()
+        cur.execute("SELECT `book_id` FROM `book_author` WHERE `author_id` = "+str(author_id)+";")
+        for row in cur.fetchall():
+            self.lastResult = [str(row[0])]
+        return self.lastResult
+    def GetAuthorByBookId(self,book_id):
+        cur = self.db.cursor()
+        cur.execute("SELECT `author_id` FROM `book_author` WHERE `book_id` = "+str(book_id)+";")
+        for row in cur.fetchall():
+            self.lastResult = [str(row[0])]
+        return self.lastResult
+    def DeleteBookByAuthorId(self,author_id):
+        cur = self.db.cursor()
+        cur.execute("DELETE FROM `book_author` WHERE `author_id` = "+str(author_id)+";")
+        self.db.commit()
+        cur.close()
+    def DeleteAuthorByBookId(self,book_id):
+        cur = self.db.cursor()
+        cur.execute("DELETE FROM `book_author` WHERE `book_id` = "+str(book_id)+";")
+        self.db.commit()
+        cur.close()
+
+    def AddBookGenre(self,book_id,genre_id):
+        cur = self.db.cursor()
+        cur.execute("INSERT INTO `book_genre` (`genre_id`,`book_id`) VALUES ("+str(genre_id)+ "," + str(book_id)+");")
+        self.db.commit()
+        cur.close()
+    def GetBookByGenreId(self,genre_id):
+        cur = self.db.cursor()
+        cur.execute("SELECT `book_id` FROM `book_genre` WHERE `genre_id` = "+str(genre_id)+";")
+        for row in cur.fetchall():
+            self.lastResult = [str(row[0])]
+        return self.lastResult
+    def GetGenreByBookId(self,book_id):
+        cur = self.db.cursor()
+        cur.execute("SELECT `genre_id` FROM `book_genre` WHERE `book_id` = "+str(book_id)+";")
+        for row in cur.fetchall():
+            self.lastResult = [str(row[0])]
+        return self.lastResult
+    def DeleteBookByGenreId(self,genre_id):
+        cur = self.db.cursor()
+        cur.execute("DELETE FROM `book_genre` WHERE `genre_id` = "+str(genre_id)+";")
+        self.db.commit()
+        cur.close()
+    def DeleteGenreByBookId(self,book_id):
+        cur = self.db.cursor()
+        cur.execute("DELETE FROM `book_genre` WHERE `book_id` = "+str(book_id)+";")
+        self.db.commit()
+        cur.close()

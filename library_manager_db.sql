@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time:  9 юли 2018 в 18:43
+-- Generation Time:  9 юли 2018 в 19:07
 -- Версия на сървъра: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -79,7 +79,20 @@ INSERT INTO `authors` (`id`, `first_name`, `middle_name`, `last_name`) VALUES
 (38, 'David', 'Lachezarov', 'Georgiev'),
 (39, 'David', 'Lachezarov', 'Georgiev'),
 (40, 'David', 'Lachezarov', 'Georgiev'),
-(41, 'David', 'Lachezarov', 'Georgiev');
+(41, 'David', 'Lachezarov', 'Georgiev'),
+(42, 'David', 'Lachezarov', 'Georgiev'),
+(43, 'David', 'Lachezarov', 'Georgiev'),
+(44, 'David', 'Lachezarov', 'Georgiev'),
+(45, 'David', 'Lachezarov', 'Georgiev'),
+(46, 'David', 'Lachezarov', 'Georgiev'),
+(47, 'David', 'Lachezarov', 'Georgiev'),
+(48, 'David', 'Lachezarov', 'Georgiev'),
+(49, 'David', 'Lachezarov', 'Georgiev'),
+(50, 'David', 'Lachezarov', 'Georgiev'),
+(51, 'David', 'Lachezarov', 'Georgiev'),
+(52, 'David', 'Lachezarov', 'Georgiev'),
+(53, 'David', 'Lachezarov', 'Georgiev'),
+(54, 'David', 'Lachezarov', 'Georgiev');
 
 -- --------------------------------------------------------
 
@@ -125,7 +138,20 @@ INSERT INTO `book` (`title`, `id`, `publisher_id`, `anotation`, `number_of_copie
 ('title', 31, 2, 'bla bla', 2, 12.5),
 ('title', 32, 2, 'bla bla', 2, 12.5),
 ('title', 33, 2, 'bla bla', 2, 12.5),
-('title', 34, 2, 'bla bla', 2, 12.5);
+('title', 34, 2, 'bla bla', 2, 12.5),
+('title', 35, 2, 'bla bla', 2, 12.5),
+('title', 36, 2, 'bla bla', 2, 12.5),
+('title', 37, 2, 'bla bla', 2, 12.5),
+('title', 38, 2, 'bla bla', 2, 12.5),
+('title', 39, 2, 'bla bla', 2, 12.5),
+('title', 40, 2, 'bla bla', 2, 12.5),
+('title', 41, 2, 'bla bla', 2, 12.5),
+('title', 42, 2, 'bla bla', 2, 12.5),
+('title', 43, 2, 'bla bla', 2, 12.5),
+('title', 44, 2, 'bla bla', 2, 12.5),
+('title', 45, 2, 'bla bla', 2, 12.5),
+('title', 46, 2, 'bla bla', 2, 12.5),
+('title', 47, 2, 'bla bla', 2, 12.5);
 
 -- --------------------------------------------------------
 
@@ -160,6 +186,23 @@ CREATE TABLE `genre` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Схема на данните от таблица `genre`
+--
+
+INSERT INTO `genre` (`name`, `id`) VALUES
+('Music', 2),
+('Art', 3),
+('Art', 4),
+('Art', 5),
+('Art', 6),
+('Art', 7),
+('Art', 8),
+('Art', 9),
+('Art', 10),
+('Art', 11),
+('Art', 12);
+
 -- --------------------------------------------------------
 
 --
@@ -181,7 +224,20 @@ CREATE TABLE `loan` (
 --
 
 INSERT INTO `loan` (`user_id`, `book_id`, `loan_date`, `return_period`, `is_returned`, `returned_on_date`, `id`) VALUES
-(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 3);
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 3),
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 4),
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 5),
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 6),
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 7),
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 8),
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 9),
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 10),
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 11),
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 12),
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 13),
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 14),
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 15),
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 16);
 
 -- --------------------------------------------------------
 
@@ -208,7 +264,20 @@ INSERT INTO `publisher` (`id`, `name`, `address`) VALUES
 (13, 'Name', 'Sofia'),
 (14, 'Name', 'Sofia'),
 (15, 'Name', 'Sofia'),
-(16, 'Name', 'Sofia');
+(16, 'Name', 'Sofia'),
+(17, 'Name', 'Sofia'),
+(18, 'Name', 'Sofia'),
+(19, 'Name', 'Sofia'),
+(20, 'Name', 'Sofia'),
+(21, 'Name', 'Sofia'),
+(22, 'Name', 'Sofia'),
+(23, 'Name', 'Sofia'),
+(24, 'Name', 'Sofia'),
+(25, 'Name', 'Sofia'),
+(26, 'Name', 'Sofia'),
+(27, 'Name', 'Sofia'),
+(28, 'Name', 'Sofia'),
+(29, 'Name', 'Sofia');
 
 -- --------------------------------------------------------
 
@@ -280,7 +349,20 @@ INSERT INTO `reading_card` (`id`, `issue_date`) VALUES
 (53, '2018-07-09'),
 (54, '2018-07-09'),
 (55, '2018-07-09'),
-(56, '2018-07-09');
+(56, '2018-07-09'),
+(57, '2018-07-09'),
+(58, '2018-07-09'),
+(59, '2018-07-09'),
+(60, '2018-07-09'),
+(61, '2018-07-09'),
+(62, '2018-07-09'),
+(63, '2018-07-09'),
+(64, '2018-07-09'),
+(65, '2018-07-09'),
+(66, '2018-07-09'),
+(67, '2018-07-09'),
+(68, '2018-07-09'),
+(69, '2018-07-09');
 
 -- --------------------------------------------------------
 
@@ -359,7 +441,20 @@ INSERT INTO `user` (`id`, `first_name`, `middle_name`, `last_name`, `reading_car
 (55, 'David', 'Lachezarov', 'Georgiev', 53, '0893514113', 'david.l.georgiev@gmail.com'),
 (56, 'David', 'Lachezarov', 'Georgiev', 54, '0893514113', 'david.l.georgiev@gmail.com'),
 (57, 'David', 'Lachezarov', 'Georgiev', 55, '0893514113', 'david.l.georgiev@gmail.com'),
-(58, 'David', 'Lachezarov', 'Georgiev', 56, '0893514113', 'david.l.georgiev@gmail.com');
+(58, 'David', 'Lachezarov', 'Georgiev', 56, '0893514113', 'david.l.georgiev@gmail.com'),
+(59, 'David', 'Lachezarov', 'Georgiev', 57, '0893514113', 'david.l.georgiev@gmail.com'),
+(60, 'David', 'Lachezarov', 'Georgiev', 58, '0893514113', 'david.l.georgiev@gmail.com'),
+(61, 'David', 'Lachezarov', 'Georgiev', 59, '0893514113', 'david.l.georgiev@gmail.com'),
+(62, 'David', 'Lachezarov', 'Georgiev', 60, '0893514113', 'david.l.georgiev@gmail.com'),
+(63, 'David', 'Lachezarov', 'Georgiev', 61, '0893514113', 'david.l.georgiev@gmail.com'),
+(64, 'David', 'Lachezarov', 'Georgiev', 62, '0893514113', 'david.l.georgiev@gmail.com'),
+(65, 'David', 'Lachezarov', 'Georgiev', 63, '0893514113', 'david.l.georgiev@gmail.com'),
+(66, 'David', 'Lachezarov', 'Georgiev', 64, '0893514113', 'david.l.georgiev@gmail.com'),
+(67, 'David', 'Lachezarov', 'Georgiev', 65, '0893514113', 'david.l.georgiev@gmail.com'),
+(68, 'David', 'Lachezarov', 'Georgiev', 66, '0893514113', 'david.l.georgiev@gmail.com'),
+(69, 'David', 'Lachezarov', 'Georgiev', 67, '0893514113', 'david.l.georgiev@gmail.com'),
+(70, 'David', 'Lachezarov', 'Georgiev', 68, '0893514113', 'david.l.georgiev@gmail.com'),
+(71, 'David', 'Lachezarov', 'Georgiev', 69, '0893514113', 'david.l.georgiev@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -433,43 +528,43 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `genre`
 --
 ALTER TABLE `genre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `loan`
 --
 ALTER TABLE `loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `publisher`
 --
 ALTER TABLE `publisher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `reading_card`
 --
 ALTER TABLE `reading_card`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- Ограничения за дъмпнати таблици

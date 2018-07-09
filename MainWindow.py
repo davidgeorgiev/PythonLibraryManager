@@ -29,8 +29,25 @@ class Frame(wx.Frame):
 
         myDataBaseConnector.AddLoan(['"2"', '"10"', "\""+str(datetime.date.today())+"\"", '"2018-08-01"', '"0"'])
         print(myDataBaseConnector.GetLoanInfo(1))
-        #myDataBaseConnector.DeleteLoan(1)
+        myDataBaseConnector.DeleteLoan(1)
         myDataBaseConnector.EditLoan(1,['"2"', '"10"', "\""+str(datetime.date.today())+"\"", '"2018-08-01"', '"0"', '"2018-07-12"'])
+
+        myDataBaseConnector.AddGenre(['"Art"'])
+        print(myDataBaseConnector.GetGenreInfo(2))
+        myDataBaseConnector.DeleteGenre(1)
+        myDataBaseConnector.EditGenre(2,['"Music"'])
+
+        myDataBaseConnector.AddBookAuthor(10,2);
+        print(myDataBaseConnector.GetBookByAuthorId(2))
+        print(myDataBaseConnector.GetAuthorByBookId(10))
+        myDataBaseConnector.DeleteBookByAuthorId(2);
+        myDataBaseConnector.DeleteAuthorByBookId(10);
+
+        myDataBaseConnector.AddBookGenre(10,2);
+        print(myDataBaseConnector.GetBookByGenreId(2))
+        print(myDataBaseConnector.GetGenreByBookId(10))
+        myDataBaseConnector.DeleteBookByGenreId(2);
+        myDataBaseConnector.DeleteGenreByBookId(10);
 
 
 
