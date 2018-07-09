@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time:  9 юли 2018 в 17:41
+-- Generation Time:  9 юли 2018 в 18:43
 -- Версия на сървъра: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -60,7 +60,26 @@ INSERT INTO `authors` (`id`, `first_name`, `middle_name`, `last_name`) VALUES
 (19, 'David', 'Lachezarov', 'Georgiev'),
 (20, 'David', 'Lachezarov', 'Georgiev'),
 (21, 'David', 'Lachezarov', 'Georgiev'),
-(22, 'David', 'Lachezarov', 'Georgiev');
+(22, 'David', 'Lachezarov', 'Georgiev'),
+(23, 'David', 'Lachezarov', 'Georgiev'),
+(24, 'David', 'Lachezarov', 'Georgiev'),
+(25, 'David', 'Lachezarov', 'Georgiev'),
+(26, 'David', 'Lachezarov', 'Georgiev'),
+(27, 'David', 'Lachezarov', 'Georgiev'),
+(28, 'David', 'Lachezarov', 'Georgiev'),
+(29, 'David', 'Lachezarov', 'Georgiev'),
+(30, 'David', 'Lachezarov', 'Georgiev'),
+(31, 'David', 'Lachezarov', 'Georgiev'),
+(32, 'David', 'Lachezarov', 'Georgiev'),
+(33, 'David', 'Lachezarov', 'Georgiev'),
+(34, 'David', 'Lachezarov', 'Georgiev'),
+(35, 'David', 'Lachezarov', 'Georgiev'),
+(36, 'David', 'Lachezarov', 'Georgiev'),
+(37, 'David', 'Lachezarov', 'Georgiev'),
+(38, 'David', 'Lachezarov', 'Georgiev'),
+(39, 'David', 'Lachezarov', 'Georgiev'),
+(40, 'David', 'Lachezarov', 'Georgiev'),
+(41, 'David', 'Lachezarov', 'Georgiev');
 
 -- --------------------------------------------------------
 
@@ -88,7 +107,25 @@ INSERT INTO `book` (`title`, `id`, `publisher_id`, `anotation`, `number_of_copie
 ('title', 13, 2, 'bla bla', 2, 12.5),
 ('title', 14, 2, 'bla bla', 2, 12.5),
 ('title', 15, 2, 'bla bla', 2, 12.5),
-('title', 16, 2, 'bla bla', 2, 12.5);
+('title', 16, 2, 'bla bla', 2, 12.5),
+('title', 17, 2, 'bla bla', 2, 12.5),
+('title', 18, 2, 'bla bla', 2, 12.5),
+('title', 19, 2, 'bla bla', 2, 12.5),
+('title', 20, 2, 'bla bla', 2, 12.5),
+('title', 21, 2, 'bla bla', 2, 12.5),
+('title', 22, 2, 'bla bla', 2, 12.5),
+('title', 23, 2, 'bla bla', 2, 12.5),
+('title', 24, 2, 'bla bla', 2, 12.5),
+('title', 25, 2, 'bla bla', 2, 12.5),
+('title', 26, 2, 'bla bla', 2, 12.5),
+('title', 27, 2, 'bla bla', 2, 12.5),
+('title', 28, 2, 'bla bla', 2, 12.5),
+('title', 29, 2, 'bla bla', 2, 12.5),
+('title', 30, 2, 'bla bla', 2, 12.5),
+('title', 31, 2, 'bla bla', 2, 12.5),
+('title', 32, 2, 'bla bla', 2, 12.5),
+('title', 33, 2, 'bla bla', 2, 12.5),
+('title', 34, 2, 'bla bla', 2, 12.5);
 
 -- --------------------------------------------------------
 
@@ -135,9 +172,16 @@ CREATE TABLE `loan` (
   `loan_date` date NOT NULL,
   `return_period` date NOT NULL,
   `is_returned` tinyint(1) NOT NULL,
-  `returned_on_date` date NOT NULL,
+  `returned_on_date` date DEFAULT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Схема на данните от таблица `loan`
+--
+
+INSERT INTO `loan` (`user_id`, `book_id`, `loan_date`, `return_period`, `is_returned`, `returned_on_date`, `id`) VALUES
+(2, 10, '2018-07-09', '2018-08-01', 0, NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -150,6 +194,21 @@ CREATE TABLE `publisher` (
   `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `address` varchar(30) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Схема на данните от таблица `publisher`
+--
+
+INSERT INTO `publisher` (`id`, `name`, `address`) VALUES
+(2, 'Name', 'Sofia'),
+(9, 'Name', 'Sofia'),
+(10, 'Name', 'Sofia'),
+(11, 'Name', 'Sofia'),
+(12, 'Name', 'Sofia'),
+(13, 'Name', 'Sofia'),
+(14, 'Name', 'Sofia'),
+(15, 'Name', 'Sofia'),
+(16, 'Name', 'Sofia');
 
 -- --------------------------------------------------------
 
@@ -200,7 +259,28 @@ INSERT INTO `reading_card` (`id`, `issue_date`) VALUES
 (32, '2018-07-09'),
 (33, '2018-07-09'),
 (34, '2018-07-09'),
-(35, '2018-07-09');
+(35, '2018-07-09'),
+(36, '2018-07-09'),
+(37, '2018-07-09'),
+(38, '2018-07-09'),
+(39, '2018-07-09'),
+(40, '2018-07-09'),
+(41, '2018-07-09'),
+(42, '2018-07-09'),
+(43, '2018-07-09'),
+(44, '2018-07-09'),
+(45, '2018-07-09'),
+(46, '2018-07-09'),
+(47, '2018-07-09'),
+(48, '2018-07-09'),
+(49, '2018-07-09'),
+(50, '2018-07-09'),
+(51, '2018-07-09'),
+(52, '2018-07-09'),
+(53, '2018-07-09'),
+(54, '2018-07-09'),
+(55, '2018-07-09'),
+(56, '2018-07-09');
 
 -- --------------------------------------------------------
 
@@ -258,7 +338,28 @@ INSERT INTO `user` (`id`, `first_name`, `middle_name`, `last_name`, `reading_car
 (34, 'David', 'Lachezarov', 'Georgiev', 32, '0893514113', 'david.l.georgiev@gmail.com'),
 (35, 'David', 'Lachezarov', 'Georgiev', 33, '0893514113', 'david.l.georgiev@gmail.com'),
 (36, 'David', 'Lachezarov', 'Georgiev', 34, '0893514113', 'david.l.georgiev@gmail.com'),
-(37, 'David', 'Lachezarov', 'Georgiev', 35, '0893514113', 'david.l.georgiev@gmail.com');
+(37, 'David', 'Lachezarov', 'Georgiev', 35, '0893514113', 'david.l.georgiev@gmail.com'),
+(38, 'David', 'Lachezarov', 'Georgiev', 36, '0893514113', 'david.l.georgiev@gmail.com'),
+(39, 'David', 'Lachezarov', 'Georgiev', 37, '0893514113', 'david.l.georgiev@gmail.com'),
+(40, 'David', 'Lachezarov', 'Georgiev', 38, '0893514113', 'david.l.georgiev@gmail.com'),
+(41, 'David', 'Lachezarov', 'Georgiev', 39, '0893514113', 'david.l.georgiev@gmail.com'),
+(42, 'David', 'Lachezarov', 'Georgiev', 40, '0893514113', 'david.l.georgiev@gmail.com'),
+(43, 'David', 'Lachezarov', 'Georgiev', 41, '0893514113', 'david.l.georgiev@gmail.com'),
+(44, 'David', 'Lachezarov', 'Georgiev', 42, '0893514113', 'david.l.georgiev@gmail.com'),
+(45, 'David', 'Lachezarov', 'Georgiev', 43, '0893514113', 'david.l.georgiev@gmail.com'),
+(46, 'David', 'Lachezarov', 'Georgiev', 44, '0893514113', 'david.l.georgiev@gmail.com'),
+(47, 'David', 'Lachezarov', 'Georgiev', 45, '0893514113', 'david.l.georgiev@gmail.com'),
+(48, 'David', 'Lachezarov', 'Georgiev', 46, '0893514113', 'david.l.georgiev@gmail.com'),
+(49, 'David', 'Lachezarov', 'Georgiev', 47, '0893514113', 'david.l.georgiev@gmail.com'),
+(50, 'David', 'Lachezarov', 'Georgiev', 48, '0893514113', 'david.l.georgiev@gmail.com'),
+(51, 'David', 'Lachezarov', 'Georgiev', 49, '0893514113', 'david.l.georgiev@gmail.com'),
+(52, 'David', 'Lachezarov', 'Georgiev', 50, '0893514113', 'david.l.georgiev@gmail.com'),
+(53, 'David', 'Lachezarov', 'Georgiev', 51, '0893514113', 'david.l.georgiev@gmail.com'),
+(54, 'David', 'Lachezarov', 'Georgiev', 52, '0893514113', 'david.l.georgiev@gmail.com'),
+(55, 'David', 'Lachezarov', 'Georgiev', 53, '0893514113', 'david.l.georgiev@gmail.com'),
+(56, 'David', 'Lachezarov', 'Georgiev', 54, '0893514113', 'david.l.georgiev@gmail.com'),
+(57, 'David', 'Lachezarov', 'Georgiev', 55, '0893514113', 'david.l.georgiev@gmail.com'),
+(58, 'David', 'Lachezarov', 'Georgiev', 56, '0893514113', 'david.l.georgiev@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -268,14 +369,14 @@ INSERT INTO `user` (`id`, `first_name`, `middle_name`, `last_name`, `reading_car
 -- Indexes for table `authors`
 --
 ALTER TABLE `authors`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `id` (`id`) USING BTREE;
 
 --
 -- Indexes for table `book`
 --
 ALTER TABLE `book`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `publisher_id` (`publisher_id`);
+  ADD KEY `publisher_id` (`publisher_id`),
+  ADD KEY `id` (`id`) USING BTREE;
 
 --
 -- Indexes for table `book_author`
@@ -295,34 +396,34 @@ ALTER TABLE `book_genre`
 -- Indexes for table `genre`
 --
 ALTER TABLE `genre`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `id` (`id`) USING BTREE;
 
 --
 -- Indexes for table `loan`
 --
 ALTER TABLE `loan`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `book_id` (`book_id`);
+  ADD KEY `book_id` (`book_id`),
+  ADD KEY `id` (`id`) USING BTREE;
 
 --
 -- Indexes for table `publisher`
 --
 ALTER TABLE `publisher`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `id` (`id`) USING BTREE;
 
 --
 -- Indexes for table `reading_card`
 --
 ALTER TABLE `reading_card`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `id` (`id`) USING BTREE;
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `reading_card_id` (`reading_card_id`);
+  ADD KEY `reading_card_id` (`reading_card_id`),
+  ADD KEY `id` (`id`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -332,13 +433,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `genre`
@@ -350,29 +451,35 @@ ALTER TABLE `genre`
 -- AUTO_INCREMENT for table `loan`
 --
 ALTER TABLE `loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `publisher`
 --
 ALTER TABLE `publisher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `reading_card`
 --
 ALTER TABLE `reading_card`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Ограничения за дъмпнати таблици
 --
+
+--
+-- Ограничения за таблица `book`
+--
+ALTER TABLE `book`
+  ADD CONSTRAINT `book_ibfk_1` FOREIGN KEY (`publisher_id`) REFERENCES `publisher` (`id`);
 
 --
 -- Ограничения за таблица `book_author`
@@ -385,8 +492,8 @@ ALTER TABLE `book_author`
 -- Ограничения за таблица `book_genre`
 --
 ALTER TABLE `book_genre`
-  ADD CONSTRAINT `book_genre_ibfk_1` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`),
-  ADD CONSTRAINT `book_genre_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`);
+  ADD CONSTRAINT `book_genre_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`),
+  ADD CONSTRAINT `book_genre_ibfk_2` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`);
 
 --
 -- Ограничения за таблица `loan`
@@ -394,12 +501,6 @@ ALTER TABLE `book_genre`
 ALTER TABLE `loan`
   ADD CONSTRAINT `loan_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `loan_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`);
-
---
--- Ограничения за таблица `publisher`
---
-ALTER TABLE `publisher`
-  ADD CONSTRAINT `publisher_ibfk_1` FOREIGN KEY (`id`) REFERENCES `book` (`publisher_id`);
 
 --
 -- Ограничения за таблица `user`
