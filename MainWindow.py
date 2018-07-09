@@ -7,47 +7,52 @@ import datetime
 class Frame(wx.Frame):
     def __init__(self, title):
         myDataBaseConnector = DataBaseConnector(self)
-        myDataBaseConnector.AddUser(['"David"', '"Lachezarov"', '"Georgiev"', '"0893514113"', '"david.l.georgiev@gmail.com"'])
+        '''myDataBaseConnector.AddUser(['"David"', '"Lachezarov"', '"Georgiev"', '"0893514113"', '"david.l.georgiev@gmail.com"'])
         print(myDataBaseConnector.GetUserInfo(9))
-        myDataBaseConnector.DeleteUser(1)
+        #myDataBaseConnector.DeleteUser(1)
         myDataBaseConnector.EditUser(2,['"David2"', '"Lachezarov2"', '"Georgiev2"', '"0893514113"', '"david.l.georgiev@gmail.com"'])
 
         myDataBaseConnector.AddAuthor(['"David"', '"Lachezarov"', '"Georgiev"'])
         print(myDataBaseConnector.GetAuthorInfo(1))
-        myDataBaseConnector.DeleteAuthor(1)
+        #myDataBaseConnector.DeleteAuthor(1)
         myDataBaseConnector.EditAuthor(1,['"David2"', '"Lachezarov2"', '"Georgiev2"'])
 
-        myDataBaseConnector.AddBook(['"title"', '2', '"bla bla"', '"2"', '"12.5"'])
+        myDataBaseConnector.AddPublisher(['"Name"', '"Sofia"'])
+        print(myDataBaseConnector.GetPublisherInfo(1))
+        #myDataBaseConnector.DeletePublisher(1)
+        myDataBaseConnector.EditPublisher(1,['"Name2"', '"Varna"'])
+
+        myDataBaseConnector.AddBook(['"title"', '1', '"bla bla"', '"2"', '"12.5"'])
         print(myDataBaseConnector.GetBookInfo(1))
-        myDataBaseConnector.DeleteBook(1)
+        #myDataBaseConnector.DeleteBook(1)
         myDataBaseConnector.EditBook(10,['"title2"', '2', '"bla bla"', '"2"', '"14.5"'])
 
         myDataBaseConnector.AddPublisher(['"Name"', '"Sofia"'])
         print(myDataBaseConnector.GetPublisherInfo(1))
-        myDataBaseConnector.DeletePublisher(1)
+        #myDataBaseConnector.DeletePublisher(1)
         myDataBaseConnector.EditPublisher(1,['"Name2"', '"Varna"'])
 
         myDataBaseConnector.AddLoan(['"2"', '"10"', "\""+str(datetime.date.today())+"\"", '"2018-08-01"', '"0"'])
         print(myDataBaseConnector.GetLoanInfo(1))
-        myDataBaseConnector.DeleteLoan(1)
+        #myDataBaseConnector.DeleteLoan(1)
         myDataBaseConnector.EditLoan(1,['"2"', '"10"', "\""+str(datetime.date.today())+"\"", '"2018-08-01"', '"0"', '"2018-07-12"'])
 
         myDataBaseConnector.AddGenre(['"Art"'])
         print(myDataBaseConnector.GetGenreInfo(2))
-        myDataBaseConnector.DeleteGenre(1)
+        #myDataBaseConnector.DeleteGenre(1)
         myDataBaseConnector.EditGenre(2,['"Music"'])
 
         myDataBaseConnector.AddBookAuthor(10,2);
         print(myDataBaseConnector.GetBookByAuthorId(2))
         print(myDataBaseConnector.GetAuthorByBookId(10))
-        myDataBaseConnector.DeleteBookByAuthorId(2);
-        myDataBaseConnector.DeleteAuthorByBookId(10);
+        #myDataBaseConnector.DeleteBookByAuthorId(2);
+        #myDataBaseConnector.DeleteAuthorByBookId(10);
 
         myDataBaseConnector.AddBookGenre(10,2);
         print(myDataBaseConnector.GetBookByGenreId(2))
         print(myDataBaseConnector.GetGenreByBookId(10))
-        myDataBaseConnector.DeleteBookByGenreId(2);
-        myDataBaseConnector.DeleteGenreByBookId(10);
+        #myDataBaseConnector.DeleteBookByGenreId(2);
+        #myDataBaseConnector.DeleteGenreByBookId(10);'''
 
 
 
