@@ -64,15 +64,22 @@ class BookAdderWindow(wx.Frame):
 
         manager_box.Add(self.GetNewChoiceField(panel,"издателство".decode('utf8'),0,self.publishers_list), 0, wx.LEFT, 10)
 
-        self.selected_genres = wx.TextCtrl(panel, id = -1, size = (300, 80), style = wx.TE_MULTILINE | wx.TE_READONLY)
-        manager_box.Add(self.selected_genres, 0, wx.LEFT, 10)
         genre_author_box = wx.BoxSizer(wx.HORIZONTAL)
+
+        genre_box = wx.BoxSizer(wx.VERTICAL)
+        self.selected_genres = wx.TextCtrl(panel, id = -1, size = (150, 80), style = wx.TE_MULTILINE | wx.TE_READONLY)
         add_genre_to_book_button = wx.Button(panel, wx.ID_CLOSE, "Добави жанр".decode('utf8'))
         add_genre_to_book_button.Bind(wx.EVT_BUTTON, self.OnAddGenreToBook)
-        genre_author_box.Add(add_genre_to_book_button, 0, wx.ALL, 10)
+        genre_box.Add(self.selected_genres, 0, wx.ALL, 10)
+        genre_box.Add(add_genre_to_book_button, 0, wx.ALL, 10)
+
+        author_box = wx.BoxSizer(wx.VERTICAL)
         add_author_to_book_button = wx.Button(panel, wx.ID_CLOSE, "Добави автор".decode('utf8'))
         add_author_to_book_button.Bind(wx.EVT_BUTTON, self.OnAddAuthorToBook)
-        genre_author_box.Add(add_author_to_book_button, 0, wx.ALL, 10)
+        author_box.Add(add_author_to_book_button, 0, wx.ALL, 10)
+
+        genre_author_box.Add(genre_box, 0, wx.ALL, 0)
+        genre_author_box.Add(author_box, 0, wx.ALL, 0)
 
         manager_box.Add(genre_author_box, 0, wx.ALL, 10)
 
@@ -105,7 +112,7 @@ class BookAdderWindow(wx.Frame):
         self.parent.myFormatedInfoGetter.UpdateMainInfo()
         self.Destroy()
     def InitMyWindow(self,title):
-        wx.Frame.__init__(self, None, title=title, size=(460,550))
+        wx.Frame.__init__(self, None, title=title, size=(460,600))
         self.Center()
     def GetNewChoiceField(self,panel,label,index,list_of_choices):
 		FirstBox = wx.BoxSizer(wx.HORIZONTAL)
