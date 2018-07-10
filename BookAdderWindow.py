@@ -4,12 +4,14 @@ import wx, wx.html
 import wx.lib.scrolledpanel
 from DataBaseConnector import DataBaseConnector
 from GenreToBookAdder import GenreToBookAdder
+from AuthorToBookAdder import AuthorToBookAdder
 from OtherMethods import OtherMethods
 
 class BookAdderWindow(wx.Frame):
     def __init__(self,parent):
         self.myDataBaseConnector = DataBaseConnector(self)
-        self.currentBoookGenreIds = list()
+        self.currentBookGenreIds = list()
+        self.currentBookAuthorIds = list()
         self.inputChoices = list()
         self.publishers_list = list()
         self.PopulatePublisherList()
@@ -22,6 +24,12 @@ class BookAdderWindow(wx.Frame):
         box = self.GetManagerBoxSizer(panel)
         panel.SetSizer(box)
         panel.Layout()
+
+    def AppendToCurrentBookGenreIds(self,var):
+        self.currentBookGenreIds.append(var)
+    def AppendToCurrentBookAuthorIds(self,var):
+        self.currentBookAuthorIds.append(var)
+
     def GetManagerBoxSizer(self,panel):
         manager_box = wx.BoxSizer(wx.VERTICAL)
         m_text = wx.StaticText(panel, -1, "ДОБАВИ КНИГА".decode('utf8'))
@@ -74,8 +82,10 @@ class BookAdderWindow(wx.Frame):
         genre_box.Add(add_genre_to_book_button, 0, wx.ALL, 10)
 
         author_box = wx.BoxSizer(wx.VERTICAL)
+        self.selected_authors = wx.TextCtrl(panel, id = -1, size = (150, 80), style = wx.TE_MULTILINE | wx.TE_READONLY)
         add_author_to_book_button = wx.Button(panel, wx.ID_CLOSE, "Добави автор".decode('utf8'))
         add_author_to_book_button.Bind(wx.EVT_BUTTON, self.OnAddAuthorToBook)
+        author_box.Add(self.selected_authors, 0, wx.ALL, 10)
         author_box.Add(add_author_to_book_button, 0, wx.ALL, 10)
 
         genre_author_box.Add(genre_box, 0, wx.ALL, 0)
@@ -91,13 +101,23 @@ class BookAdderWindow(wx.Frame):
     def UpdateSelectedGenres(self):
         genre_names = list()
         label_string = "жанрове:".decode("utf8")
-        for i in self.currentBoookGenreIds:
+        for i in self.currentBookGenreIds:
             genre_names.append(self.myDataBaseConnector.GetGenreInfo(i)[1])
         delimiter = " "
         for i in genre_names:
             label_string+=delimiter+i
             delimiter = ", "
         self.selected_genres.SetValue(label_string)
+    def UpdateSelectedAuthors(self):
+        author_names = list()
+        label_string = "автори:".decode("utf8")
+        for i in self.currentBookAuthorIds:
+            author_names.append(self.myDataBaseConnector.GetAuthorIdAndNameById(i))
+        delimiter = " "
+        for i in author_names:
+            label_string+=delimiter+i[0]
+            delimiter = ", "
+        self.selected_authors.SetValue(label_string)
     def GetDataFromFields(self):
         return_list = list()
         return_list.append(self.myOtherMethods.AddQuotes(self.title_input.GetValue()))
@@ -108,7 +128,8 @@ class BookAdderWindow(wx.Frame):
         return return_list
     def OnAdd(self,event):
         book_index = self.myDataBaseConnector.AddBook(self.GetDataFromFields())
-        self.myDataBaseConnector.AddGenresToBookWithId(book_index,self.currentBoookGenreIds)
+        self.myDataBaseConnector.AddGenresToBookWithId(book_index,self.currentBookGenreIds)
+        self.myDataBaseConnector.AddAuthorsToBookWithId(book_index,self.currentBookAuthorIds)
         self.parent.myFormatedInfoGetter.UpdateMainInfo()
         self.Destroy()
     def InitMyWindow(self,title):
@@ -131,6 +152,6 @@ class BookAdderWindow(wx.Frame):
         window = GenreToBookAdder(self)
         window.Show()
     def OnAddAuthorToBook(self,event):
-        #window = AuthorToBookAdder(self)
-        #window.Show()
+        window = AuthorToBookAdder(self)
+        window.Show()
         return None

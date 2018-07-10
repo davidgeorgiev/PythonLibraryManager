@@ -268,6 +268,29 @@ class DataBaseConnector():
                 print >> sys.stderr, "failed to encode row #%s - %s" % (i, e)
         self.lastResult = name_list
         return self.lastResult
+    def GetAllAuthorsIdsAndNames(self):
+        name_list = list()
+        cur = self.db.cursor()
+        cur.execute("SELECT * FROM `authors`;")
+        for i, row in enumerate(cur):
+            try:
+                name_list.append(str(row[0]).decode("utf8")+" "+str(row[1]).decode("utf8")+" "+str(row[2]).decode("utf8")+" "+str(row[3]).decode("utf8"))
+            except UnicodeEncodeError as e:
+                print >> sys.stderr, "failed to encode row #%s - %s" % (i, e)
+        self.lastResult = name_list
+        return self.lastResult
+    def GetAuthorIdAndNameById(self,id):
+        name_list = list()
+        cur = self.db.cursor()
+        cur.execute("SELECT * FROM `authors` WHERE id = "+id+";")
+        for i, row in enumerate(cur):
+            try:
+                name_list.append(str(row[0]).decode("utf8")+" "+str(row[1]).decode("utf8")+" "+str(row[2]).decode("utf8")+" "+str(row[3]).decode("utf8"))
+            except UnicodeEncodeError as e:
+                print >> sys.stderr, "failed to encode row #%s - %s" % (i, e)
+        self.lastResult = name_list
+        return self.lastResult
+
     def GetPublisherIdByName(self,publisher_name):
         cur = self.db.cursor()
         cur.execute("SELECT `id` FROM `publisher` WHERE name = \""+publisher_name+"\";")
@@ -284,3 +307,6 @@ class DataBaseConnector():
     def AddGenresToBookWithId(self,book_id,list_of_genre_ids):
         for i in list_of_genre_ids:
             self.AddBookGenre(book_id,i)
+    def AddAuthorsToBookWithId(self,book_id,list_of_author_ids):
+        for i in list_of_author_ids:
+            self.AddBookAuthor(book_id,i)
