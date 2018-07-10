@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import wx, wx.html
 import sys
 from DataBaseConnector import DataBaseConnector
@@ -27,11 +30,6 @@ class Frame(wx.Frame):
         #myDataBaseConnector.DeleteBook(1)
         myDataBaseConnector.EditBook(10,['"title2"', '2', '"bla bla"', '"2"', '"14.5"'])
 
-        myDataBaseConnector.AddPublisher(['"Name"', '"Sofia"'])
-        print(myDataBaseConnector.GetPublisherInfo(1))
-        #myDataBaseConnector.DeletePublisher(1)
-        myDataBaseConnector.EditPublisher(1,['"Name2"', '"Varna"'])
-
         myDataBaseConnector.AddLoan(['"2"', '"10"', "\""+str(datetime.date.today())+"\"", '"2018-08-01"', '"0"'])
         print(myDataBaseConnector.GetLoanInfo(1))
         #myDataBaseConnector.DeleteLoan(1)
@@ -56,31 +54,68 @@ class Frame(wx.Frame):
 
 
 
-        wx.Frame.__init__(self, None, title=title, pos=(150,150), size=(350,200))
+        wx.Frame.__init__(self, None, title=title, size=(800,500))
         self.Bind(wx.EVT_CLOSE, self.OnClose)
+        self.Center()
 
         menuBar = wx.MenuBar()
-        menu = wx.Menu()
-        m_exit = menu.Append(wx.ID_EXIT, "E&xit\tAlt-X", "Close window and exit program.")
+        menu1 = wx.Menu()
+        m_exit = menu1.Append(wx.ID_EXIT, "И&зход\tAlt-X".decode('utf8'), "Затвори прозореца и излез от програмата".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnClose, m_exit)
-        menuBar.Append(menu, "&File")
-        menu = wx.Menu()
-        m_about = menu.Append(wx.ID_ABOUT, "&About", "Information about this program")
-        self.Bind(wx.EVT_MENU, self.OnAbout, m_about)
-        menuBar.Append(menu, "&Help")
-        self.SetMenuBar(menuBar)
+        menuBar.Append(menu1, "&Файл".decode('utf8'))
 
+        menu2 = wx.Menu()
+        m_add_user = menu2.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави потребител".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnAbout, m_add_user)
+        m_user_manager = menu2.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на потребителите".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnAbout, m_user_manager)
+        menuBar.Append(menu2, "&Потребители".decode('utf8'))
+
+        menu3 = wx.Menu()
+        m_add_book = menu3.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави книга".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnAbout, m_add_book)
+        m_book_manager = menu3.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на книгите".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnAbout, m_book_manager)
+        menuBar.Append(menu3, "&Книги".decode('utf8'))
+
+        menu4 = wx.Menu()
+        m_add_genre = menu4.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави жанр".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnAbout, m_add_genre)
+        m_genre_manager = menu4.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на жанровете".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnAbout, m_genre_manager)
+        menuBar.Append(menu4, "&Жанрове".decode('utf8'))
+
+        menu5 = wx.Menu()
+        m_add_author = menu5.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави автор".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnAbout, m_add_author)
+        m_author_manager = menu5.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на авторите".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnAbout, m_author_manager)
+        menuBar.Append(menu5, "&Автори".decode('utf8'))
+
+        menu6 = wx.Menu()
+        m_add_publisher = menu6.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави издателство".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnAbout, m_add_publisher)
+        m_publisher_manager = menu6.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на издателствата".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnAbout, m_publisher_manager)
+        menuBar.Append(menu6, "&Издателства".decode('utf8'))
+
+        menu_about = wx.Menu()
+        m_about = menu_about.Append(wx.ID_ABOUT, "&За програмата".decode('utf8'), "Информация за програмата".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnAbout, m_about)
+        menuBar.Append(menu_about, "&Помощ".decode('utf8'))
+
+        self.SetMenuBar(menuBar)
         self.statusbar = self.CreateStatusBar()
 
         panel = wx.Panel(self)
         box = wx.BoxSizer(wx.VERTICAL)
 
-        m_text = wx.StaticText(panel, -1, "Hello World!")
+        m_text = wx.StaticText(panel, -1, "Организатор за библиотека".decode('utf8'))
         m_text.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
         m_text.SetSize(m_text.GetBestSize())
         box.Add(m_text, 0, wx.ALL, 10)
 
-        m_close = wx.Button(panel, wx.ID_CLOSE, "Close")
+        m_close = wx.Button(panel, wx.ID_CLOSE, "Затвори".decode('utf8'))
         m_close.Bind(wx.EVT_BUTTON, self.OnClose)
         box.Add(m_close, 0, wx.ALL, 10)
 
@@ -89,19 +124,19 @@ class Frame(wx.Frame):
 
     def OnClose(self, event):
         dlg = wx.MessageDialog(self,
-            "Do you really want to close this application?",
-            "Confirm Exit", wx.OK|wx.CANCEL|wx.ICON_QUESTION)
+            "Наистина ли искате да затворите програмата?".decode('utf8'),
+            "Излизане".decode('utf8'), wx.OK|wx.CANCEL|wx.ICON_QUESTION)
         result = dlg.ShowModal()
         dlg.Destroy()
         if result == wx.ID_OK:
             self.Destroy()
 
     def OnAbout(self, event):
-        msg = wx.MessageDialog(self,"Created by David Georgiev","About",wx.OK | wx.ICON_INFORMATION)
+        msg = wx.MessageDialog(self,"Автор: Давид Георгиев от ТУ-София ФКСТ КСИ гр.46".decode('utf8'),"За програмата".decode('utf8'),wx.OK | wx.ICON_INFORMATION)
         msg.ShowModal()
         msg.Destroy()
 
 app = wx.App(redirect=False)   # Error messages go to popup window
-top = Frame("Library Manager v0.1")
+top = Frame("Организатор за библиотека v0.1".decode('utf8'))
 top.Show()
 app.MainLoop()
