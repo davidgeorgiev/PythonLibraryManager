@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 import MySQLdb
 import datetime
+import sys
 
 class DataBaseConnector():
     def __init__(self,parent):
         self.lastResult = list()
         self.databaseName = "library_manager_db"
-        self.db = MySQLdb.connect(user="root",passwd="",db=self.databaseName,unix_socket="/opt/lampp/var/mysql/mysql.sock",charset='utf8')
+        self.db = MySQLdb.connect(user="root",passwd="",db=self.databaseName,unix_socket="/opt/lampp/var/mysql/mysql.sock",charset="utf8",use_unicode=True)
         self.parent = parent
 
     def AddReadingCard(self):
@@ -239,6 +240,24 @@ class DataBaseConnector():
     def GetNumberOfPublishers(self):
         cur = self.db.cursor()
         cur.execute("SELECT COUNT(id) FROM `publisher`;")
+        for row in cur.fetchall():
+            self.lastResult = str(row[0])
+        return self.lastResult
+
+    def GetAllPublisherNames(self):
+        name_list = list()
+        cur = self.db.cursor()
+        cur.execute("SELECT `name` FROM `publisher`;")
+        for i, row in enumerate(cur):
+            try:
+                name_list.append(str(row[0]).decode("utf8"))
+            except UnicodeEncodeError as e:
+                print >> sys.stderr, "failed to encode row #%s - %s" % (i, e)
+        self.lastResult = name_list
+        return self.lastResult
+    def GetPublisherIdByName(self,publisher_name):
+        cur = self.db.cursor()
+        cur.execute("SELECT `id` FROM `publisher` WHERE name = \""+publisher_name+"\";")
         for row in cur.fetchall():
             self.lastResult = str(row[0])
         return self.lastResult
