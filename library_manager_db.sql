@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time:  9 юли 2018 в 19:07
+-- Generation Time: 10 юли 2018 в 14:30
 -- Версия на сървъра: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -34,9 +34,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `authors` (
   `id` int(11) NOT NULL,
-  `first_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `middle_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL
+  `first_name` varbinary(30) DEFAULT NULL,
+  `middle_name` varbinary(30) NOT NULL,
+  `last_name` varbinary(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -46,10 +46,10 @@ CREATE TABLE `authors` (
 --
 
 CREATE TABLE `book` (
-  `title` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varbinary(30) NOT NULL,
   `id` int(11) NOT NULL,
   `publisher_id` int(11) NOT NULL,
-  `anotation` text COLLATE utf8_unicode_ci NOT NULL,
+  `anotation` varbinary(255) NOT NULL,
   `number_of_copies` int(11) NOT NULL,
   `price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -83,7 +83,7 @@ CREATE TABLE `book_genre` (
 --
 
 CREATE TABLE `genre` (
-  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varbinary(30) NOT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -111,8 +111,8 @@ CREATE TABLE `loan` (
 
 CREATE TABLE `publisher` (
   `id` int(11) NOT NULL,
-  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `address` varchar(30) COLLATE utf8_unicode_ci NOT NULL
+  `name` varbinary(30) NOT NULL,
+  `address` varbinary(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -134,12 +134,12 @@ CREATE TABLE `reading_card` (
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `first_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `middle_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varbinary(30) NOT NULL,
+  `middle_name` varbinary(30) NOT NULL,
+  `last_name` varbinary(30) NOT NULL,
   `reading_card_id` int(11) NOT NULL,
-  `phone` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `e_mail` varchar(30) COLLATE utf8_unicode_ci NOT NULL
+  `phone` varbinary(30) NOT NULL,
+  `e_mail` varbinary(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -214,43 +214,43 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `genre`
 --
 ALTER TABLE `genre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `loan`
 --
 ALTER TABLE `loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `publisher`
 --
 ALTER TABLE `publisher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `reading_card`
 --
 ALTER TABLE `reading_card`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Ограничения за дъмпнати таблици
