@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import MySQLdb
 import datetime
 
@@ -5,7 +7,7 @@ class DataBaseConnector():
     def __init__(self,parent):
         self.lastResult = list()
         self.databaseName = "library_manager_db"
-        self.db = MySQLdb.connect(user="root",passwd="",db=self.databaseName,unix_socket="/opt/lampp/var/mysql/mysql.sock")
+        self.db = MySQLdb.connect(user="root",passwd="",db=self.databaseName,unix_socket="/opt/lampp/var/mysql/mysql.sock",charset='utf8')
         self.parent = parent
 
     def AddReadingCard(self):
@@ -203,3 +205,40 @@ class DataBaseConnector():
         cur.execute("DELETE FROM `book_genre` WHERE `book_id` = "+str(book_id)+";")
         self.db.commit()
         cur.close()
+
+    def GetNumberOfUsers(self):
+        cur = self.db.cursor()
+        cur.execute("SELECT COUNT(id) FROM `user`;")
+        for row in cur.fetchall():
+            self.lastResult = str(row[0])
+        return self.lastResult
+    def GetNumberOfTitles(self):
+        cur = self.db.cursor()
+        cur.execute("SELECT COUNT(id) FROM `book`;")
+        for row in cur.fetchall():
+            self.lastResult = str(row[0])
+        return self.lastResult
+    def GetNumberOfBooks(self):
+        cur = self.db.cursor()
+        cur.execute("SELECT SUM(number_of_copies) FROM `book`;")
+        for row in cur.fetchall():
+            self.lastResult = str(row[0])
+        return self.lastResult
+    def GetNumberOfGenres(self):
+        cur = self.db.cursor()
+        cur.execute("SELECT COUNT(id) FROM `genre`;")
+        for row in cur.fetchall():
+            self.lastResult = str(row[0])
+        return self.lastResult
+    def GetNumberOfAuthors(self):
+        cur = self.db.cursor()
+        cur.execute("SELECT COUNT(id) FROM `authors`;")
+        for row in cur.fetchall():
+            self.lastResult = str(row[0])
+        return self.lastResult
+    def GetNumberOfPublishers(self):
+        cur = self.db.cursor()
+        cur.execute("SELECT COUNT(id) FROM `publisher`;")
+        for row in cur.fetchall():
+            self.lastResult = str(row[0])
+        return self.lastResult

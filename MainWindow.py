@@ -3,61 +3,78 @@
 
 import wx, wx.html
 import sys
-from DataBaseConnector import DataBaseConnector
+from FormatedInfoGetter import FormatedInfoGetter
+from UserAdderWindow import UserAdderWindow
+from AuthorAdderWindow import AuthorAdderWindow
 import datetime
 
 
 class Frame(wx.Frame):
     def __init__(self, title):
-        myDataBaseConnector = DataBaseConnector(self)
-        '''myDataBaseConnector.AddUser(['"David"', '"Lachezarov"', '"Georgiev"', '"0893514113"', '"david.l.georgiev@gmail.com"'])
-        print(myDataBaseConnector.GetUserInfo(9))
-        #myDataBaseConnector.DeleteUser(1)
-        myDataBaseConnector.EditUser(2,['"David2"', '"Lachezarov2"', '"Georgiev2"', '"0893514113"', '"david.l.georgiev@gmail.com"'])
+        self.myFormatedInfoGetter = FormatedInfoGetter(self)
+        self.InitMyWindow(title)
+        self.InitMyMenu()
+        self.InitMyStatusBar()
+        self.panel = wx.Panel(self)
+        box = self.GetDefaultBoxSizer(self.panel)
+        self.panel.SetSizer(box)
+        self.panel.Layout()
+        self.OnUpdateMainInfo(None)
 
-        myDataBaseConnector.AddAuthor(['"David"', '"Lachezarov"', '"Georgiev"'])
-        print(myDataBaseConnector.GetAuthorInfo(1))
-        #myDataBaseConnector.DeleteAuthor(1)
-        myDataBaseConnector.EditAuthor(1,['"David2"', '"Lachezarov2"', '"Georgiev2"'])
+    def InitMyStatusBar(self):
+        self.statusbar = self.CreateStatusBar()
+    def GetDefaultBoxSizer(self,panel):
+        box = wx.BoxSizer(wx.HORIZONTAL)
+        box.Add(self.GetInfoBoxSizer(panel), 0, wx.ALL, 10)
+        return box
+    def GetInfoBoxSizer(self,panel):
+        info_box = wx.BoxSizer(wx.VERTICAL)
+        m_text = wx.StaticText(panel, -1, "ИНФОРМАЦИЯ ЗА БИБЛИОТЕКАТА".decode('utf8'))
+        m_text.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
+        m_text.SetSize(m_text.GetBestSize())
+        info_box.Add(m_text, 0, wx.ALL, 10)
 
-        myDataBaseConnector.AddPublisher(['"Name"', '"Sofia"'])
-        print(myDataBaseConnector.GetPublisherInfo(1))
-        #myDataBaseConnector.DeletePublisher(1)
-        myDataBaseConnector.EditPublisher(1,['"Name2"', '"Varna"'])
+        self.number_of_users = wx.StaticText(panel, -1, "".decode('utf8'))
+        self.number_of_users.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
+        self.number_of_users.SetSize(self.number_of_users.GetBestSize())
+        info_box.Add(self.number_of_users, 0, wx.ALL, 10)
 
-        myDataBaseConnector.AddBook(['"title"', '1', '"bla bla"', '"2"', '"12.5"'])
-        print(myDataBaseConnector.GetBookInfo(1))
-        #myDataBaseConnector.DeleteBook(1)
-        myDataBaseConnector.EditBook(10,['"title2"', '2', '"bla bla"', '"2"', '"14.5"'])
+        self.number_of_titles = wx.StaticText(panel, -1, "".decode('utf8'))
+        self.number_of_titles.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
+        self.number_of_titles.SetSize(self.number_of_titles.GetBestSize())
+        info_box.Add(self.number_of_titles, 0, wx.ALL, 10)
 
-        myDataBaseConnector.AddLoan(['"2"', '"10"', "\""+str(datetime.date.today())+"\"", '"2018-08-01"', '"0"'])
-        print(myDataBaseConnector.GetLoanInfo(1))
-        #myDataBaseConnector.DeleteLoan(1)
-        myDataBaseConnector.EditLoan(1,['"2"', '"10"', "\""+str(datetime.date.today())+"\"", '"2018-08-01"', '"0"', '"2018-07-12"'])
+        self.number_of_books = wx.StaticText(panel, -1, "".decode('utf8'))
+        self.number_of_books.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
+        self.number_of_books.SetSize(self.number_of_books.GetBestSize())
+        info_box.Add(self.number_of_books, 0, wx.ALL, 10)
 
-        myDataBaseConnector.AddGenre(['"Art"'])
-        print(myDataBaseConnector.GetGenreInfo(2))
-        #myDataBaseConnector.DeleteGenre(1)
-        myDataBaseConnector.EditGenre(2,['"Music"'])
+        self.number_of_genres = wx.StaticText(panel, -1, "".decode('utf8'))
+        self.number_of_genres.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
+        self.number_of_genres.SetSize(self.number_of_genres.GetBestSize())
+        info_box.Add(self.number_of_genres, 0, wx.ALL, 10)
 
-        myDataBaseConnector.AddBookAuthor(10,2);
-        print(myDataBaseConnector.GetBookByAuthorId(2))
-        print(myDataBaseConnector.GetAuthorByBookId(10))
-        #myDataBaseConnector.DeleteBookByAuthorId(2);
-        #myDataBaseConnector.DeleteAuthorByBookId(10);
+        self.number_of_authors = wx.StaticText(panel, -1, "".decode('utf8'))
+        self.number_of_authors.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
+        self.number_of_authors.SetSize(self.number_of_authors.GetBestSize())
+        info_box.Add(self.number_of_authors, 0, wx.ALL, 10)
 
-        myDataBaseConnector.AddBookGenre(10,2);
-        print(myDataBaseConnector.GetBookByGenreId(2))
-        print(myDataBaseConnector.GetGenreByBookId(10))
-        #myDataBaseConnector.DeleteBookByGenreId(2);
-        #myDataBaseConnector.DeleteGenreByBookId(10);'''
+        self.number_of_publishers = wx.StaticText(panel, -1, "".decode('utf8'))
+        self.number_of_publishers.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
+        self.number_of_publishers.SetSize(self.number_of_publishers.GetBestSize())
+        info_box.Add(self.number_of_publishers, 0, wx.ALL, 10)
 
+        m_close = wx.Button(panel, wx.ID_CLOSE, "Обнови".decode('utf8'))
+        m_close.Bind(wx.EVT_BUTTON, self.OnUpdateMainInfo)
+        info_box.Add(m_close, 0, wx.ALL, 10)
+        return info_box
 
-
-        wx.Frame.__init__(self, None, title=title, size=(800,500))
+    def InitMyWindow(self,title):
+        wx.Frame.__init__(self, None, title=title, size=(460,380))
         self.Bind(wx.EVT_CLOSE, self.OnClose)
         self.Center()
 
+    def InitMyMenu(self):
         menuBar = wx.MenuBar()
         menu1 = wx.Menu()
         m_exit = menu1.Append(wx.ID_EXIT, "И&зход\tAlt-X".decode('utf8'), "Затвори прозореца и излез от програмата".decode('utf8'))
@@ -66,7 +83,7 @@ class Frame(wx.Frame):
 
         menu2 = wx.Menu()
         m_add_user = menu2.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави потребител".decode('utf8'))
-        self.Bind(wx.EVT_MENU, self.OnAbout, m_add_user)
+        self.Bind(wx.EVT_MENU, self.OnAddUser, m_add_user)
         m_user_manager = menu2.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на потребителите".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnAbout, m_user_manager)
         menuBar.Append(menu2, "&Потребители".decode('utf8'))
@@ -87,7 +104,7 @@ class Frame(wx.Frame):
 
         menu5 = wx.Menu()
         m_add_author = menu5.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави автор".decode('utf8'))
-        self.Bind(wx.EVT_MENU, self.OnAbout, m_add_author)
+        self.Bind(wx.EVT_MENU, self.OnAddAuthor, m_add_author)
         m_author_manager = menu5.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на авторите".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnAbout, m_author_manager)
         menuBar.Append(menu5, "&Автори".decode('utf8'))
@@ -105,22 +122,6 @@ class Frame(wx.Frame):
         menuBar.Append(menu_about, "&Помощ".decode('utf8'))
 
         self.SetMenuBar(menuBar)
-        self.statusbar = self.CreateStatusBar()
-
-        panel = wx.Panel(self)
-        box = wx.BoxSizer(wx.VERTICAL)
-
-        m_text = wx.StaticText(panel, -1, "Организатор за библиотека".decode('utf8'))
-        m_text.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.BOLD))
-        m_text.SetSize(m_text.GetBestSize())
-        box.Add(m_text, 0, wx.ALL, 10)
-
-        m_close = wx.Button(panel, wx.ID_CLOSE, "Затвори".decode('utf8'))
-        m_close.Bind(wx.EVT_BUTTON, self.OnClose)
-        box.Add(m_close, 0, wx.ALL, 10)
-
-        panel.SetSizer(box)
-        panel.Layout()
 
     def OnClose(self, event):
         dlg = wx.MessageDialog(self,
@@ -135,6 +136,14 @@ class Frame(wx.Frame):
         msg = wx.MessageDialog(self,"Автор: Давид Георгиев от ТУ-София ФКСТ КСИ гр.46".decode('utf8'),"За програмата".decode('utf8'),wx.OK | wx.ICON_INFORMATION)
         msg.ShowModal()
         msg.Destroy()
+    def OnUpdateMainInfo(self,event):
+        self.myFormatedInfoGetter.UpdateMainInfo()
+    def OnAddUser(self,event):
+        window = UserAdderWindow(self)
+        window.Show()
+    def OnAddAuthor(self,event):
+        window = AuthorAdderWindow(self)
+        window.Show()
 
 app = wx.App(redirect=False)   # Error messages go to popup window
 top = Frame("Организатор за библиотека v0.1".decode('utf8'))
