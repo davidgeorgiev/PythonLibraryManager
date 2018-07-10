@@ -6,6 +6,8 @@ import sys
 from FormatedInfoGetter import FormatedInfoGetter
 from UserAdderWindow import UserAdderWindow
 from AuthorAdderWindow import AuthorAdderWindow
+from GenreAdderWindow import GenreAdderWindow
+from PublisherAdderWindow import PublisherAdderWindow
 import datetime
 
 
@@ -97,7 +99,7 @@ class Frame(wx.Frame):
 
         menu4 = wx.Menu()
         m_add_genre = menu4.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави жанр".decode('utf8'))
-        self.Bind(wx.EVT_MENU, self.OnAbout, m_add_genre)
+        self.Bind(wx.EVT_MENU, self.OnAddGenre, m_add_genre)
         m_genre_manager = menu4.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на жанровете".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnAbout, m_genre_manager)
         menuBar.Append(menu4, "&Жанрове".decode('utf8'))
@@ -111,7 +113,7 @@ class Frame(wx.Frame):
 
         menu6 = wx.Menu()
         m_add_publisher = menu6.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави издателство".decode('utf8'))
-        self.Bind(wx.EVT_MENU, self.OnAbout, m_add_publisher)
+        self.Bind(wx.EVT_MENU, self.OnAddPublisher, m_add_publisher)
         m_publisher_manager = menu6.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на издателствата".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnAbout, m_publisher_manager)
         menuBar.Append(menu6, "&Издателства".decode('utf8'))
@@ -143,6 +145,12 @@ class Frame(wx.Frame):
         window.Show()
     def OnAddAuthor(self,event):
         window = AuthorAdderWindow(self)
+        window.Show()
+    def OnAddGenre(self,event):
+        window = GenreAdderWindow(self)
+        window.Show()
+    def OnAddPublisher(self,event):
+        window = PublisherAdderWindow(self)
         window.Show()
 
 app = wx.App(redirect=False)   # Error messages go to popup window
