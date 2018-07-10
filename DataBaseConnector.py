@@ -67,7 +67,9 @@ class DataBaseConnector():
         cur = self.db.cursor()
         cur.execute("INSERT INTO `book` (`title`,`publisher_id`,`anotation`,`number_of_copies`,`price`) VALUES ("+dataList[0]+","+dataList[1]+","+dataList[2]+","+dataList[3]+","+dataList[4]+");")
         self.db.commit()
+        last_row_id = cur.lastrowid
         cur.close()
+        return last_row_id
     def GetBookInfo(self,id):
         cur = self.db.cursor()
         cur.execute("SELECT * FROM `book` WHERE `id` = "+str(id)+";")
@@ -138,7 +140,7 @@ class DataBaseConnector():
         cur = self.db.cursor()
         cur.execute("SELECT * FROM `genre` WHERE `id` = "+str(id)+";")
         for row in cur.fetchall():
-            self.lastResult = [str(row[0])]
+            self.lastResult = [str(row[1]),str(row[0]).decode("utf8")]
         return self.lastResult
     def DeleteGenre(self,id):
         cur = self.db.cursor()
@@ -255,9 +257,30 @@ class DataBaseConnector():
                 print >> sys.stderr, "failed to encode row #%s - %s" % (i, e)
         self.lastResult = name_list
         return self.lastResult
+    def GetAllGenreNames(self):
+        name_list = list()
+        cur = self.db.cursor()
+        cur.execute("SELECT `name` FROM `genre`;")
+        for i, row in enumerate(cur):
+            try:
+                name_list.append(str(row[0]).decode("utf8"))
+            except UnicodeEncodeError as e:
+                print >> sys.stderr, "failed to encode row #%s - %s" % (i, e)
+        self.lastResult = name_list
+        return self.lastResult
     def GetPublisherIdByName(self,publisher_name):
         cur = self.db.cursor()
         cur.execute("SELECT `id` FROM `publisher` WHERE name = \""+publisher_name+"\";")
         for row in cur.fetchall():
             self.lastResult = str(row[0])
         return self.lastResult
+    def GetGenreIdByName(self,genre_name):
+        cur = self.db.cursor()
+        cur.execute("SELECT `id` FROM `genre` WHERE name = \""+genre_name+"\";")
+        for row in cur.fetchall():
+            self.lastResult = str(row[0])
+        return self.lastResult
+
+    def AddGenresToBookWithId(self,book_id,list_of_genre_ids):
+        for i in list_of_genre_ids:
+            self.AddBookGenre(book_id,i)
