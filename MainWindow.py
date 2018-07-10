@@ -8,6 +8,7 @@ from UserAdderWindow import UserAdderWindow
 from AuthorAdderWindow import AuthorAdderWindow
 from GenreAdderWindow import GenreAdderWindow
 from PublisherAdderWindow import PublisherAdderWindow
+from BookAdderWindow import BookAdderWindow
 import datetime
 
 
@@ -92,7 +93,7 @@ class Frame(wx.Frame):
 
         menu3 = wx.Menu()
         m_add_book = menu3.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави книга".decode('utf8'))
-        self.Bind(wx.EVT_MENU, self.OnAbout, m_add_book)
+        self.Bind(wx.EVT_MENU, self.OnAddBook, m_add_book)
         m_book_manager = menu3.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на книгите".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnAbout, m_book_manager)
         menuBar.Append(menu3, "&Книги".decode('utf8'))
@@ -151,6 +152,9 @@ class Frame(wx.Frame):
         window.Show()
     def OnAddPublisher(self,event):
         window = PublisherAdderWindow(self)
+        window.Show()
+    def OnAddBook(self,event):
+        window = BookAdderWindow(self)
         window.Show()
 
 app = wx.App(redirect=False)   # Error messages go to popup window
