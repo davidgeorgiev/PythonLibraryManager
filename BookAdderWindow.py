@@ -98,7 +98,6 @@ class BookAdderWindow(wx.Frame):
         return_list.append(self.myOtherMethods.AddQuotes(self.anotation_input.GetValue()))
         return_list.append(self.myOtherMethods.AddQuotes(self.number_of_copies_input.GetValue()))
         return_list.append(self.myOtherMethods.AddQuotes(self.price_input.GetValue()))
-        print(return_list)
         return return_list
     def OnAdd(self,event):
         book_index = self.myDataBaseConnector.AddBook(self.GetDataFromFields())
