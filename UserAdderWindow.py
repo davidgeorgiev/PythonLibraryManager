@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import wx, wx.html
+from datetime import datetime
 from DataBaseConnector import DataBaseConnector
 from OtherMethods import OtherMethods
+from DatePicker import DatePicker
 
 class UserAdderWindow(wx.Frame):
     def __init__(self,parent):
+        self.card_expire_date = "0000-00-00"
+        self.myDatePicker = DatePicker(self)
         self.myOtherMethods = OtherMethods(self)
         self.myDataBaseConnector = DataBaseConnector(self)
         self.parent = parent
@@ -66,11 +70,26 @@ class UserAdderWindow(wx.Frame):
         email_box.Add(self.email_input, 0, wx.ALL, 10)
         manager_box.Add(email_box, 0, wx.LEFT, 10)
 
+        card_expire_date_box = wx.BoxSizer(wx.HORIZONTAL)
+        card_expire_date_label = wx.StaticText(panel, -1, "  активен до  ".decode('utf8'))
+        card_expire_date_label.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
+        card_expire_date_label.SetSize(card_expire_date_label.GetBestSize())
+        card_expire_date_box.Add(card_expire_date_label, 0, wx.LEFT, 10)
+        self.date_picker = self.myDatePicker.GetDatePicker(panel)
+        self.date_picker.Bind(wx.EVT_DATE_CHANGED, self.OnDateChanged)
+        card_expire_date_box.Add(self.date_picker, 0, wx.LEFT, 10)
+        manager_box.Add(card_expire_date_box, 0, wx.ALL, 0)
+
+
         add_button = wx.Button(panel, wx.ID_CLOSE, "Добави".decode('utf8'))
         add_button.Bind(wx.EVT_BUTTON, self.OnAdd)
         manager_box.Add(add_button, 0, wx.ALL, 10)
 
         return manager_box
+    def OnDateChanged(self,event):
+        date_str = str(event.GetDate())
+        mydate = datetime.strptime(date_str,'%m/%d/%y %H:%M:%S')
+        self.card_expire_date = mydate.strftime('%Y-%m-%d')
     def GetDataFromFields(self):
         return_list = list()
         return_list.append(self.myOtherMethods.AddQuotes(self.first_name_input.GetValue()))
@@ -78,6 +97,7 @@ class UserAdderWindow(wx.Frame):
         return_list.append(self.myOtherMethods.AddQuotes(self.last_name_input.GetValue()))
         return_list.append(self.myOtherMethods.AddQuotes(self.phone_input.GetValue()))
         return_list.append(self.myOtherMethods.AddQuotes(self.email_input.GetValue()))
+        return_list.append(self.myOtherMethods.AddQuotes(self.card_expire_date))
         return return_list
     def OnAdd(self,event):
         self.myDataBaseConnector.AddUser(self.GetDataFromFields())

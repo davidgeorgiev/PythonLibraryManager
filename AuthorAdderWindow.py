@@ -30,15 +30,6 @@ class AuthorAdderWindow(wx.Frame):
         first_name_box.Add(self.first_name_input, 0, wx.ALL, 10)
         manager_box.Add(first_name_box, 0, wx.LEFT, 10)
 
-        middle_name_box = wx.BoxSizer(wx.HORIZONTAL)
-        middle_name_label = wx.StaticText(panel, -1, "второ име".decode('utf8'))
-        middle_name_label.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
-        first_name_label.SetSize(middle_name_label.GetBestSize())
-        middle_name_box.Add(middle_name_label, 0, wx.ALL, 10)
-        self.middle_name_input = wx.TextCtrl(panel, -1, size=(140,-1))
-        middle_name_box.Add(self.middle_name_input, 0, wx.ALL, 10)
-        manager_box.Add(middle_name_box, 0, wx.LEFT, 10)
-
         last_name_box = wx.BoxSizer(wx.HORIZONTAL)
         last_name_label = wx.StaticText(panel, -1, "трето име ".decode('utf8'))
         last_name_label.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
@@ -56,7 +47,6 @@ class AuthorAdderWindow(wx.Frame):
     def GetDataFromFields(self):
         return_list = list()
         return_list.append(self.myOtherMethods.AddQuotes(self.first_name_input.GetValue()))
-        return_list.append(self.myOtherMethods.AddQuotes(self.middle_name_input.GetValue()))
         return_list.append(self.myOtherMethods.AddQuotes(self.last_name_input.GetValue()))
         return return_list
     def OnAdd(self,event):

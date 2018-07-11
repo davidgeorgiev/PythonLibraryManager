@@ -11,15 +11,15 @@ class DataBaseConnector():
         self.db = MySQLdb.connect(user="root",passwd="",db=self.databaseName,unix_socket="/opt/lampp/var/mysql/mysql.sock",charset="utf8",use_unicode=True)
         self.parent = parent
 
-    def AddReadingCard(self):
+    def AddReadingCard(self,expire_date):
         cur = self.db.cursor()
-        cur.execute("INSERT INTO `reading_card` (`issue_date`) VALUES (\""+str(datetime.date.today())+"\");")
+        cur.execute("INSERT INTO `reading_card` (`issue_date`,`expire_date`) VALUES (\""+str(datetime.date.today())+"\","+str(expire_date)+");")
         self.db.commit()
         last_row_id = cur.lastrowid
         cur.close()
         return "\""+str(last_row_id)+"\""
     def AddUser(self,dataList):
-        card_id  = self.AddReadingCard()
+        card_id  = self.AddReadingCard(dataList[5])
         cur = self.db.cursor()
         cur.execute("INSERT INTO `user` (`first_name`,`middle_name`,`last_name`,`phone`,`e_mail`,`reading_card_id`) VALUES ("+dataList[0]+","+dataList[1]+","+dataList[2]+","+dataList[3]+","+dataList[4]+","+card_id+");")
         self.db.commit()
@@ -43,14 +43,14 @@ class DataBaseConnector():
 
     def AddAuthor(self,dataList):
         cur = self.db.cursor()
-        cur.execute("INSERT INTO `authors` (`first_name`,`middle_name`,`last_name`) VALUES ("+dataList[0]+","+dataList[1]+","+dataList[2]+");")
+        cur.execute("INSERT INTO `authors` (`first_name`,`last_name`) VALUES ("+dataList[0]+","+dataList[1]+");")
         self.db.commit()
         cur.close()
     def GetAuthorInfo(self,id):
         cur = self.db.cursor()
         cur.execute("SELECT * FROM `authors` WHERE `id` = "+str(id)+";")
         for row in cur.fetchall():
-            self.lastResult = [str(row[0]),str(row[1]),str(row[2]),str(row[3])]
+            self.lastResult = [str(row[0]),str(row[1]),str(row[2])]
         return self.lastResult
     def DeleteAuthor(self,id):
         cur = self.db.cursor()
@@ -59,7 +59,7 @@ class DataBaseConnector():
         cur.close()
     def EditAuthor(self,id,dataList):
         cur = self.db.cursor()
-        cur.execute("UPDATE `authors` SET `first_name` = "+dataList[0]+", `middle_name` = "+dataList[1]+", `last_name` = "+dataList[2]+" WHERE id = "+str(id)+";")
+        cur.execute("UPDATE `authors` SET `first_name` = "+dataList[0]+", `last_name` = "+dataList[1]+" WHERE id = "+str(id)+";")
         self.db.commit()
         cur.close()
 
@@ -274,7 +274,7 @@ class DataBaseConnector():
         cur.execute("SELECT * FROM `authors`;")
         for i, row in enumerate(cur):
             try:
-                name_list.append(str(row[0]).decode("utf8")+" "+str(row[1]).decode("utf8")+" "+str(row[2]).decode("utf8")+" "+str(row[3]).decode("utf8"))
+                name_list.append(str(row[0]).decode("utf8")+" "+str(row[1]).decode("utf8")+" "+str(row[2]).decode("utf8"))
             except UnicodeEncodeError as e:
                 print >> sys.stderr, "failed to encode row #%s - %s" % (i, e)
         self.lastResult = name_list
@@ -285,7 +285,7 @@ class DataBaseConnector():
         cur.execute("SELECT * FROM `authors` WHERE id = "+id+";")
         for i, row in enumerate(cur):
             try:
-                name_list.append(str(row[0]).decode("utf8")+" "+str(row[1]).decode("utf8")+" "+str(row[2]).decode("utf8")+" "+str(row[3]).decode("utf8"))
+                name_list.append(str(row[0]).decode("utf8")+" "+str(row[1]).decode("utf8")+" "+str(row[2]).decode("utf8"))
             except UnicodeEncodeError as e:
                 print >> sys.stderr, "failed to encode row #%s - %s" % (i, e)
         self.lastResult = name_list

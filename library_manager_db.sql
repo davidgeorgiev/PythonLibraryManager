@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 10 юли 2018 в 17:28
+-- Generation Time: 11 юли 2018 в 10:15
 -- Версия на сървъра: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -35,10 +35,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `authors` (
   `id` int(11) NOT NULL,
   `first_name` varbinary(1024) DEFAULT NULL,
-  `middle_name` varbinary(1024) NOT NULL,
   `last_name` varbinary(1024) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 -- --------------------------------------------------------
 
 --
@@ -65,6 +63,7 @@ CREATE TABLE `book_author` (
   `book_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+
 -- --------------------------------------------------------
 
 --
@@ -86,7 +85,6 @@ CREATE TABLE `genre` (
   `name` varbinary(1024) NOT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 -- --------------------------------------------------------
 
 --
@@ -114,7 +112,6 @@ CREATE TABLE `publisher` (
   `name` varbinary(1024) NOT NULL,
   `address` varbinary(1024) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 -- --------------------------------------------------------
 
 --
@@ -123,9 +120,9 @@ CREATE TABLE `publisher` (
 
 CREATE TABLE `reading_card` (
   `id` int(11) NOT NULL,
-  `issue_date` date NOT NULL
+  `issue_date` date NOT NULL,
+  `expire_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 -- --------------------------------------------------------
 
 --
@@ -141,7 +138,6 @@ CREATE TABLE `user` (
   `phone` varbinary(1024) NOT NULL,
   `e_mail` varbinary(1024) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 --
 -- Indexes for dumped tables
 --
@@ -214,19 +210,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `genre`
 --
 ALTER TABLE `genre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `loan`
@@ -238,19 +234,19 @@ ALTER TABLE `loan`
 -- AUTO_INCREMENT for table `publisher`
 --
 ALTER TABLE `publisher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `reading_card`
 --
 ALTER TABLE `reading_card`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Ограничения за дъмпнати таблици
