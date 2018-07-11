@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11 юли 2018 в 20:20
+-- Generation Time: 11 юли 2018 в 20:46
 -- Версия на сървъра: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -389,8 +389,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `first_name`, `middle_name`, `last_name`, `reading_card_id`, `phone`, `e_mail`) VALUES
 (23, 0xd0a1d182d0b5d184d0b0d0bd, 0xd098d0b2d0b0d0bdd0bed0b2, 0xd093d0b5d0bed180d0b3d0b8d0b5d0b2, 26, 0x2839343829203335342d32393433, 0x636172726572617340686f746d61696c2e636f6d),
-(24, 0xd09ad0bed0bdd181d182d0b0d0bdd182d0b8d0bd, 0xd094d0b8d0bcd0b8d182d180d0bed0b2, 0xd0a1d182d0bed18fd0bdd0bed0b2, 27, 0x2836383029203932342d34343236, 0x6b6d696c6c6572406d61632e636f6d),
-(25, 0xd09ad180d0b0d181d0b8d0bcd0b8d180, 0xd09fd0b5d0bdd187d0b5d0b2, 0xd093d0b5d0bed180d0b3d0b8d0b5d0b2, 28, 0x2835383529203639332d32353533, 0x7073686172706540686f746d61696c2e636f6d);
+(24, 0xd09ad0bed0bdd181d182d0b0d0bdd182d0b8d0bd, 0xd094d0b8d0bcd0b8d182d180d0bed0b2, 0xd0a1d182d0bed18fd0bdd0bed0b2, 27, 0x2836383029203932342d34343236, 0x6b6d696c6c6572406d61632e636f6d);
 
 --
 -- Indexes for dumped tables
