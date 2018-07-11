@@ -9,6 +9,7 @@ from AuthorAdderWindow import AuthorAdderWindow
 from GenreAdderWindow import GenreAdderWindow
 from PublisherAdderWindow import PublisherAdderWindow
 from BookAdderWindow import BookAdderWindow
+from BookManagerWindow import BookManagerWindow
 import datetime
 
 
@@ -94,28 +95,28 @@ class Frame(wx.Frame):
         m_add_book = menu3.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави книга".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnAddBook, m_add_book)
         m_book_manager = menu3.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на книгите".decode('utf8'))
-        self.Bind(wx.EVT_MENU, self.OnAbout, m_book_manager)
+        self.Bind(wx.EVT_MENU, self.OnManageBooks, m_book_manager)
         menuBar.Append(menu3, "&Книги".decode('utf8'))
 
         menu4 = wx.Menu()
         m_add_genre = menu4.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави жанр".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnAddGenre, m_add_genre)
-        m_genre_manager = menu4.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на жанровете".decode('utf8'))
-        self.Bind(wx.EVT_MENU, self.OnAbout, m_genre_manager)
+        #m_genre_manager = menu4.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на жанровете".decode('utf8'))
+        #self.Bind(wx.EVT_MENU, self.OnAbout, m_genre_manager)
         menuBar.Append(menu4, "&Жанрове".decode('utf8'))
 
         menu5 = wx.Menu()
         m_add_author = menu5.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави автор".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnAddAuthor, m_add_author)
-        m_author_manager = menu5.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на авторите".decode('utf8'))
-        self.Bind(wx.EVT_MENU, self.OnAbout, m_author_manager)
+        #m_author_manager = menu5.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на авторите".decode('utf8'))
+        #self.Bind(wx.EVT_MENU, self.OnAbout, m_author_manager)
         menuBar.Append(menu5, "&Автори".decode('utf8'))
 
         menu6 = wx.Menu()
         m_add_publisher = menu6.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави издателство".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnAddPublisher, m_add_publisher)
-        m_publisher_manager = menu6.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на издателствата".decode('utf8'))
-        self.Bind(wx.EVT_MENU, self.OnAbout, m_publisher_manager)
+        #m_publisher_manager = menu6.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на издателствата".decode('utf8'))
+        #self.Bind(wx.EVT_MENU, self.OnAbout, m_publisher_manager)
         menuBar.Append(menu6, "&Издателства".decode('utf8'))
 
         menu_about = wx.Menu()
@@ -154,4 +155,7 @@ class Frame(wx.Frame):
         window.Show()
     def OnAddBook(self,event):
         window = BookAdderWindow(self)
+        window.Show()
+    def OnManageBooks(self,event):
+        window = BookManagerWindow(self)
         window.Show()

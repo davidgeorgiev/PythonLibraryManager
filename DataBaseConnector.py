@@ -80,8 +80,17 @@ class DataBaseConnector():
         for row in cur.fetchall():
             self.lastResult = [str(row[0]),str(row[1]),str(row[2]),str(row[3]),str(row[4]),str(row[5])]
         return self.lastResult
+    def GetFullBookInfo(self,id):
+        info_list = self.GetBookInfo(id)
+        genre_list = self.GetGenresByBookId(id)
+        authors_list = self.GetAuthorsByBookId(id)
+        info_list.append(genre_list)
+        info_list.append(authors_list)
+        info_list[2] = self.GetPublisherInfo(info_list[2])[1]
+        return info_list
     def DeleteBook(self,id):
         cur = self.db.cursor()
+        print("DELETE FROM `book` WHERE `id` = "+str(id)+";")
         cur.execute("DELETE FROM `book` WHERE `id` = "+str(id)+";")
         self.db.commit()
         cur.close()
@@ -168,12 +177,6 @@ class DataBaseConnector():
         for row in cur.fetchall():
             self.lastResult = [str(row[0])]
         return self.lastResult
-    def GetAuthorByBookId(self,book_id):
-        cur = self.db.cursor()
-        cur.execute("SELECT `author_id` FROM `book_author` WHERE `book_id` = "+str(book_id)+";")
-        for row in cur.fetchall():
-            self.lastResult = [str(row[0])]
-        return self.lastResult
     def DeleteBookByAuthorId(self,author_id):
         cur = self.db.cursor()
         cur.execute("DELETE FROM `book_author` WHERE `author_id` = "+str(author_id)+";")
@@ -193,12 +196,6 @@ class DataBaseConnector():
     def GetBookByGenreId(self,genre_id):
         cur = self.db.cursor()
         cur.execute("SELECT `book_id` FROM `book_genre` WHERE `genre_id` = "+str(genre_id)+";")
-        for row in cur.fetchall():
-            self.lastResult = [str(row[0])]
-        return self.lastResult
-    def GetGenreByBookId(self,book_id):
-        cur = self.db.cursor()
-        cur.execute("SELECT `genre_id` FROM `book_genre` WHERE `book_id` = "+str(book_id)+";")
         for row in cur.fetchall():
             self.lastResult = [str(row[0])]
         return self.lastResult
@@ -314,3 +311,32 @@ class DataBaseConnector():
     def AddAuthorsToBookWithId(self,book_id,list_of_author_ids):
         for i in list_of_author_ids:
             self.AddBookAuthor(book_id,i)
+    def GetAllBookIdsAndNames(self):
+        all_books = list()
+        cur = self.db.cursor()
+        cur.execute("SELECT * FROM `book`;")
+        for row in cur.fetchall():
+            all_books.append(str(row[0]).decode("utf8") +" "+ str(row[1]).decode("utf8"))
+        self.lastResult = all_books
+        return self.lastResult
+
+    def GetGenresByBookId(self,book_id):
+        book_genre = str()
+        cur = self.db.cursor()
+        cur.execute("SELECT genre.name FROM genre JOIN book_genre ON genre.id = book_genre.genre_id WHERE book_genre.book_id = "+str(book_id)+";")
+        delimiter = ""
+        for row in cur.fetchall():
+            book_genre += delimiter+row[0].decode("utf8")
+            delimiter = ", "
+        self.lastResult = book_genre
+        return self.lastResult
+    def GetAuthorsByBookId(self,book_id):
+        book_authors = str()
+        cur = self.db.cursor()
+        cur.execute("SELECT authors.first_name,authors.last_name FROM authors JOIN book_author ON authors.id = book_author.author_id WHERE book_author.book_id = "+str(book_id)+";")
+        delimiter = ""
+        for row in cur.fetchall():
+            book_authors += delimiter+row[0].decode("utf8")+" "+row[1].decode("utf8")
+            delimiter = ", "
+        self.lastResult = book_authors
+        return self.lastResult
