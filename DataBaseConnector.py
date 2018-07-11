@@ -90,7 +90,6 @@ class DataBaseConnector():
         return info_list
     def DeleteBook(self,id):
         cur = self.db.cursor()
-        print("DELETE FROM `book` WHERE `id` = "+str(id)+";")
         cur.execute("DELETE FROM `book` WHERE `id` = "+str(id)+";")
         self.db.commit()
         cur.close()
@@ -151,7 +150,7 @@ class DataBaseConnector():
         cur.close()
     def GetGenreInfo(self,id):
         cur = self.db.cursor()
-        cur.execute("SELECT * FROM `genre` WHERE `id` = "+str(id)+";")
+        cur.execute("SELECT * FROM `genre` WHERE `id` = "+str(id)+" ORDER BY name;")
         for row in cur.fetchall():
             self.lastResult = [str(row[1]),str(row[0]).decode("utf8")]
         return self.lastResult
@@ -261,7 +260,7 @@ class DataBaseConnector():
     def GetAllGenreNames(self):
         name_list = list()
         cur = self.db.cursor()
-        cur.execute("SELECT `name` FROM `genre`;")
+        cur.execute("SELECT `name` FROM `genre` ORDER BY name;")
         for i, row in enumerate(cur):
             try:
                 name_list.append(str(row[0]).decode("utf8"))

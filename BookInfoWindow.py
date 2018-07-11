@@ -76,9 +76,9 @@ class BookInfoWindow(wx.Frame):
 
         manager_box.Add(genre_author_box, 0, wx.ALL, 10)
 
-        '''add_button = wx.Button(panel, wx.ID_CLOSE, "Изтрий книгата".decode('utf8'))
+        add_button = wx.Button(panel, wx.ID_CLOSE, "Изтрий книгата".decode('utf8'))
         add_button.Bind(wx.EVT_BUTTON, self.OnDelete)
-        manager_box.Add(add_button, 0, wx.ALL, 10)'''
+        manager_box.Add(add_button, 0, wx.ALL, 10)
 
         return manager_box
     def GetDataFromFields(self):
@@ -88,7 +88,9 @@ class BookInfoWindow(wx.Frame):
     def OnDelete(self,event):
         self.myDataBaseConnector.DeleteBook(self.book_id)
         self.parent.parent.myFormatedInfoGetter.UpdateMainInfo()
+        self.parent.parent.OnManageBooks(None)
+        self.parent.Destroy()
         self.Destroy()
     def InitMyWindow(self,title):
-        wx.Frame.__init__(self, None, title=title, size=(460,440))
+        wx.Frame.__init__(self, None, title=title, size=(460,550))
         self.Center()
