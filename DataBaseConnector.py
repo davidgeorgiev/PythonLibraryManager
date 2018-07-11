@@ -371,4 +371,12 @@ class DataBaseConnector():
         self.lastResult = remaining_days
         return (remaining_days <= 0)
     def GetNumberOfBooksAvailableInLibrary(self):
+        cur = self.db.cursor()
+        number_of_books_available_in_library = 0
+        cur.execute("SELECT SUM(book.number_of_copies)-(SELECT COUNT(*) FROM loan WHERE loan.is_returned = 0) FROM book;")
+        for row in cur.fetchall():
+             number_of_books_available_in_library = int(row[0])
+        self.lastResult = number_of_books_available_in_library
+        return self.lastResult
+
         return "NULL"
