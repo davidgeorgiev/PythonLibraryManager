@@ -274,7 +274,7 @@ class DataBaseConnector():
         cur.execute("SELECT * FROM `authors`;")
         for i, row in enumerate(cur):
             try:
-                name_list.append(str(row[0]).decode("utf8")+" "+str(row[1]).decode("utf8")+" "+str(row[2]).decode("utf8"))
+                name_list.append(str(row[1]).decode("utf8")+" "+str(row[2]).decode("utf8")+" "+str(row[0]).decode("utf8"))
             except UnicodeEncodeError as e:
                 print >> sys.stderr, "failed to encode row #%s - %s" % (i, e)
         self.lastResult = name_list
@@ -314,6 +314,14 @@ class DataBaseConnector():
         all_books = list()
         cur = self.db.cursor()
         cur.execute("SELECT * FROM `book`;")
+        for row in cur.fetchall():
+            all_books.append(str(row[0]).decode("utf8") +" "+ str(row[1]).decode("utf8"))
+        self.lastResult = all_books
+        return self.lastResult
+    def GetAllBookIdsAndNamesByAuthorWithId(self,author_id):
+        all_books = list()
+        cur = self.db.cursor()
+        cur.execute("SELECT * FROM book JOIN book_author ON book.id = book_author.book_id WHERE book_author.author_id = "+str(author_id)+";")
         for row in cur.fetchall():
             all_books.append(str(row[0]).decode("utf8") +" "+ str(row[1]).decode("utf8"))
         self.lastResult = all_books

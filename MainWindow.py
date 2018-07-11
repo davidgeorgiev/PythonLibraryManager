@@ -11,6 +11,7 @@ from PublisherAdderWindow import PublisherAdderWindow
 from BookAdderWindow import BookAdderWindow
 from BookManagerWindow import BookManagerWindow
 from UserManagerWindow import UserManagerWindow
+from AuthorManagerWindow import AuthorManagerWindow
 import datetime
 
 
@@ -109,8 +110,8 @@ class Frame(wx.Frame):
         menu5 = wx.Menu()
         m_add_author = menu5.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави автор".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnAddAuthor, m_add_author)
-        #m_author_manager = menu5.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на авторите".decode('utf8'))
-        #self.Bind(wx.EVT_MENU, self.OnAbout, m_author_manager)
+        m_author_manager = menu5.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на авторите".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnManageAuthors, m_author_manager)
         menuBar.Append(menu5, "&Автори".decode('utf8'))
 
         menu6 = wx.Menu()
@@ -162,4 +163,7 @@ class Frame(wx.Frame):
         window.Show()
     def OnManageUsers(self,event):
         window = UserManagerWindow(self)
+        window.Show()
+    def OnManageAuthors(self,event):
+        window = AuthorManagerWindow(self)
         window.Show()
