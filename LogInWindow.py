@@ -26,7 +26,7 @@ class LogInWindow(wx.Frame):
         username_label.SetSize(username_label.GetBestSize())
         username_box.Add(username_label, 0, wx.ALL, 10)
         self.username_input = wx.TextCtrl(panel, -1, size=(140,-1))
-        self.username_input.SetValue("admin")
+        #self.username_input.SetValue("admin")
         username_box.Add(self.username_input, 0, wx.ALL, 10)
         manager_box.Add(username_box, 0, wx.LEFT, 10)
 
@@ -36,7 +36,7 @@ class LogInWindow(wx.Frame):
         password_label.SetSize(password_label.GetBestSize())
         password_box.Add(password_label, 0, wx.ALL, 10)
         self.password_input = wx.TextCtrl(panel, -1, size=(140,-1),style=wx.TE_PASSWORD)
-        self.password_input.SetValue("admin123")
+        #self.password_input.SetValue("admin123")
         password_box.Add(self.password_input, 0, wx.ALL, 10)
         manager_box.Add(password_box, 0, wx.LEFT, 10)
 
@@ -55,7 +55,7 @@ class LogInWindow(wx.Frame):
         user_name = "admin"
         password = "admin123"
         if(myInfo[0] == user_name) and (myInfo[1] == password):
-            top = Frame("Организатор за библиотека v0.1".decode('utf8'))
+            top = Frame("Организатор за библиотека v1.1".decode('utf8'))
             top.Show()
             self.Destroy()
         else:
