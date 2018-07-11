@@ -87,8 +87,14 @@ class BookInfoWindow(wx.Frame):
         return return_list
     def OnDelete(self,event):
         self.myDataBaseConnector.DeleteBook(self.book_id)
-        self.parent.parent.myFormatedInfoGetter.UpdateMainInfo()
-        self.parent.parent.OnManageBooks(None)
+        try:
+            self.parent.parent.myFormatedInfoGetter.UpdateMainInfo()
+            self.parent.parent.OnManageBooks(None)
+        except:
+            self.parent.parent.parent.myFormatedInfoGetter.UpdateMainInfo()
+            self.parent.parent.parent.OnManageAuthors(None)
+            self.parent.parent.Destroy()
+
         self.parent.Destroy()
         self.Destroy()
     def InitMyWindow(self,title):
