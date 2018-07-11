@@ -3,6 +3,7 @@
 import wx, wx.html
 from DataBaseConnector import DataBaseConnector
 from OtherMethods import OtherMethods
+from LoanedBookManagerWindow import LoanedBookManagerWindow
 
 class UserInfoWindow(wx.Frame):
     def __init__(self,parent,user_id):
@@ -58,11 +59,34 @@ class UserInfoWindow(wx.Frame):
         email_box.Add(email_label, 0, wx.ALL, 10)
         manager_box.Add(email_box, 0, wx.LEFT, 10)
 
+        loaned_books_number_box = wx.BoxSizer(wx.HORIZONTAL)
+        loaned_books_number_label = wx.StaticText(panel, -1, "брой заети книги: ".decode('utf8')+str(self.myDataBaseConnector.GetNumberOfLoanedBooksByUserId(self.user_id)))
+        loaned_books_number_label.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
+        loaned_books_number_label.SetSize(loaned_books_number_label.GetBestSize())
+        loaned_books_number_box.Add(loaned_books_number_label, 0, wx.ALL, 10)
+        manager_box.Add(loaned_books_number_box, 0, wx.LEFT, 10)
+
+        loaned_books_number_box = wx.BoxSizer(wx.HORIZONTAL)
+        loaned_books_number_label = wx.StaticText(panel, -1, "брой просрочени книги: ".decode('utf8')+str(self.myDataBaseConnector.GetNumberOfOverduedLoanedBooksByUserId(self.user_id)))
+        loaned_books_number_label.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
+        loaned_books_number_label.SetForegroundColour((255,0,0)) # set text color
+        loaned_books_number_label.SetSize(loaned_books_number_label.GetBestSize())
+        loaned_books_number_box.Add(loaned_books_number_label, 0, wx.ALL, 10)
+        manager_box.Add(loaned_books_number_box, 0, wx.LEFT, 10)
+
+        show_info_button = wx.Button(panel, wx.ID_CLOSE, "Покажи заетите книги".decode('utf8'))
+        show_info_button.Bind(wx.EVT_BUTTON, self.OnShowLoanBooks)
+        manager_box.Add(show_info_button, 0, wx.ALL, 10)
+
         add_button = wx.Button(panel, wx.ID_CLOSE, "Изтрий потребителя".decode('utf8'))
         add_button.Bind(wx.EVT_BUTTON, self.OnDelete)
         manager_box.Add(add_button, 0, wx.ALL, 10)
 
         return manager_box
+    def OnShowLoanBooks(self,event):
+        window = LoanedBookManagerWindow(self,self.user_id)
+        window.Show()
+        return 0
     def GetDataFromFields(self):
         return_list = list()
         return_list.append(self.myOtherMethods.AddQuotes(self.genre_input.GetValue()))

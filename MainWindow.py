@@ -97,6 +97,8 @@ class Frame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.OnAddUser, m_add_user)
         m_user_manager = menu2.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на потребителите".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnManageUsers, m_user_manager)
+        m_user_manager = menu2.Append(wx.ID_ANY, "&Организатор - просрочени".decode('utf8'), "Организатор на потребителите, които просрочват книги".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnManageOverduedUsers, m_user_manager)
         menuBar.Append(menu2, "&Потребители".decode('utf8'))
 
         menu3 = wx.Menu()
@@ -174,7 +176,10 @@ class Frame(wx.Frame):
         window = BookManagerWindow(self)
         window.Show()
     def OnManageUsers(self,event):
-        window = UserManagerWindow(self)
+        window = UserManagerWindow(self,0)
+        window.Show()
+    def OnManageOverduedUsers(self,event):
+        window = UserManagerWindow(self,1)
         window.Show()
     def OnManageAuthors(self,event):
         window = AuthorManagerWindow(self)

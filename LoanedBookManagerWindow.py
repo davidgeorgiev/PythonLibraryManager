@@ -36,7 +36,11 @@ class LoanedBookManagerWindow(wx.Frame):
         return manager_box
     def OnDoReturnBook(self,event):
         self.myDataBaseConnector.EditLoanOnReturningABook(self.book_list[self.inputChoices[0].GetSelection()].split()[0])
-
+        try:
+            self.parent.parent.OnShowInfo(None)
+            self.parent.Destroy()
+        except:
+            pass
         self.parent.OnShowLoanBooks(None)
         self.Destroy()
     def OnShowInfo(self,event):

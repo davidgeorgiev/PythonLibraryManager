@@ -6,7 +6,8 @@ from OtherMethods import OtherMethods
 from UserInfoWindow import UserInfoWindow
 
 class UserManagerWindow(wx.Frame):
-    def __init__(self,parent):
+    def __init__(self,parent,if_overdued):
+        self.if_overdued = if_overdued
         self.myDataBaseConnector = DataBaseConnector(self)
         self.user_list = list()
         self.PopulateUsersList()
@@ -48,7 +49,10 @@ class UserManagerWindow(wx.Frame):
         wx.Frame.__init__(self, None, title=title, size=(460,380))
         self.Center()
     def PopulateUsersList(self):
-        self.user_list = self.myDataBaseConnector.GetAllUserIdsAndNames()
+        if(self.if_overdued == 0):
+            self.user_list = self.myDataBaseConnector.GetAllUserIdsAndNames()
+        else:
+            self.user_list = self.myDataBaseConnector.GetAllOverdueUserIdsAndNames()
     def GetNewChoiceField(self,panel,label,index,list_of_choices):
 		FirstBox = wx.BoxSizer(wx.HORIZONTAL)
 		m_text = wx.StaticText(panel, -1, label)

@@ -352,6 +352,14 @@ class DataBaseConnector():
             all_books.append(str(row[1]).decode("utf8") +" "+ str(row[2]).decode("utf8") +" "+ str(row[3]).decode("utf8") +" "+ str(row[0]).decode("utf8"))
         self.lastResult = all_books
         return self.lastResult
+    def GetAllOverdueUserIdsAndNames(self):
+        all_books = list()
+        cur = self.db.cursor()
+        cur.execute("SELECT * FROM `user` WHERE user.id IN (SELECT loan.user_id FROM loan WHERE loan.return_period-CURDATE()<0);")
+        for row in cur.fetchall():
+            all_books.append(str(row[1]).decode("utf8") +" "+ str(row[2]).decode("utf8") +" "+ str(row[3]).decode("utf8") +" "+ str(row[0]).decode("utf8"))
+        self.lastResult = all_books
+        return self.lastResult
     def GetGenresByBookId(self,book_id):
         book_genre = str()
         cur = self.db.cursor()
@@ -402,3 +410,23 @@ class DataBaseConnector():
         cur.execute("UPDATE `loan` SET `is_returned` = 1, `returned_on_date` = \""+str(datetime.date.today())+"\" WHERE id = "+str(id)+";")
         self.db.commit()
         cur.close()
+    def GetNumberOfLoanedBooksByUserId(self,user_id):
+        cur = self.db.cursor()
+        number_of_loaned_books = 0
+        cur.execute("SELECT COUNT(*) FROM loan WHERE loan.user_id = "+user_id+" AND loan.is_returned = 0;")
+        for row in cur.fetchall():
+             number_of_loaned_books = int(row[0])
+        self.lastResult = number_of_loaned_books
+        return self.lastResult
+    def GetNumberOfOverduedLoanedBooksByUserId(self,user_id):
+        cur = self.db.cursor()
+        number_remaining_days = list()
+        cur.execute("SELECT loan.return_period-CURDATE() FROM loan WHERE loan.user_id = "+user_id+" AND loan.is_returned = 0;")
+        for row in cur.fetchall():
+             number_remaining_days.append(int(row[0]))
+        number_of_negative = 0
+        for i in number_remaining_days:
+            if i < 0:
+                number_of_negative+=1
+        self.lastResult = number_of_negative
+        return self.lastResult
