@@ -23,7 +23,6 @@ class Frame(wx.Frame):
         self.panel.SetSizer(box)
         self.panel.Layout()
         self.OnUpdateMainInfo(None)
-
     def InitMyStatusBar(self):
         self.statusbar = self.CreateStatusBar()
     def GetDefaultBoxSizer(self,panel):
@@ -156,8 +155,3 @@ class Frame(wx.Frame):
     def OnAddBook(self,event):
         window = BookAdderWindow(self)
         window.Show()
-
-app = wx.App(redirect=False)   # Error messages go to popup window
-top = Frame("Организатор за библиотека v0.1".decode('utf8'))
-top.Show()
-app.MainLoop()

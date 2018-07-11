@@ -8,7 +8,11 @@ class DataBaseConnector():
     def __init__(self,parent):
         self.lastResult = list()
         self.databaseName = "library_manager_db"
-        self.db = MySQLdb.connect(user="root",passwd="",db=self.databaseName,unix_socket="/opt/lampp/var/mysql/mysql.sock",charset="utf8",use_unicode=True)
+        try:
+            self.db = MySQLdb.connect(user="root",passwd="",db=self.databaseName,unix_socket="/opt/lampp/var/mysql/mysql.sock",charset="utf8",use_unicode=True)
+        except:
+            print("error database\n")
+            sys.exit(1)
         self.parent = parent
 
     def AddReadingCard(self,expire_date):
