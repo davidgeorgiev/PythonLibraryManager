@@ -354,3 +354,21 @@ class DataBaseConnector():
             delimiter = ", "
         self.lastResult = book_authors
         return self.lastResult
+    def GetNumberOfAvailableBooksWithId(self,book_id):
+        cur = self.db.cursor()
+        num_of_available_books = 0
+        cur.execute("SELECT book.number_of_copies-(SELECT COUNT(*) FROM book JOIN loan ON book.id = loan.book_id WHERE book.id = "+book_id+" AND loan.book_id = "+book_id+" AND loan.is_returned = 0) FROM book WHERE book.id = "+book_id+";")
+        for row in cur.fetchall():
+            num_of_available_books = row[0]
+        self.lastResult = num_of_available_books
+        return self.lastResult
+    def GetIfUsersCardIsExpired(self,user_id):
+        cur = self.db.cursor()
+        remaining_days = 0
+        cur.execute("SELECT expire_date-CURDATE() FROM reading_card JOIN user ON user.reading_card_id = reading_card.id WHERE user.id = "+user_id+";")
+        for row in cur.fetchall():
+             remaining_days = int(row[0])
+        self.lastResult = remaining_days
+        return (remaining_days <= 0)
+    def GetNumberOfBooksAvailableInLibrary(self):
+        return "NULL"
