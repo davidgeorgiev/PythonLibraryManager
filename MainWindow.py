@@ -10,6 +10,7 @@ from GenreAdderWindow import GenreAdderWindow
 from PublisherAdderWindow import PublisherAdderWindow
 from BookAdderWindow import BookAdderWindow
 from BookManagerWindow import BookManagerWindow
+from UserManagerWindow import UserManagerWindow
 import datetime
 
 
@@ -88,7 +89,7 @@ class Frame(wx.Frame):
         m_add_user = menu2.Append(wx.ID_ANY, "&Добави".decode('utf8'), "Добави потребител".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnAddUser, m_add_user)
         m_user_manager = menu2.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на потребителите".decode('utf8'))
-        self.Bind(wx.EVT_MENU, self.OnAbout, m_user_manager)
+        self.Bind(wx.EVT_MENU, self.OnManageUsers, m_user_manager)
         menuBar.Append(menu2, "&Потребители".decode('utf8'))
 
         menu3 = wx.Menu()
@@ -158,4 +159,7 @@ class Frame(wx.Frame):
         window.Show()
     def OnManageBooks(self,event):
         window = BookManagerWindow(self)
+        window.Show()
+    def OnManageUsers(self,event):
+        window = UserManagerWindow(self)
         window.Show()
