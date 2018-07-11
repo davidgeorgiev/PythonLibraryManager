@@ -13,6 +13,7 @@ from BookManagerWindow import BookManagerWindow
 from UserManagerWindow import UserManagerWindow
 from AuthorManagerWindow import AuthorManagerWindow
 from NewLoanWindow import NewLoanWindow
+from ReturnBookWindow import ReturnBookWindow
 import datetime
 
 
@@ -85,6 +86,8 @@ class Frame(wx.Frame):
         menu1 = wx.Menu()
         m_exit = menu1.Append(wx.ID_ANY, "З&аемане на книга".decode('utf8'), "Заемане на книга".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnDoLoan, m_exit)
+        m_exit = menu1.Append(wx.ID_ANY, "В&ръщане на книга".decode('utf8'), "Връщане на книга".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnReturnBook, m_exit)
         m_exit = menu1.Append(wx.ID_EXIT, "И&зход\tAlt-X".decode('utf8'), "Затвори прозореца и излез от програмата".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnClose, m_exit)
         menuBar.Append(menu1, "&Файл".decode('utf8'))
@@ -133,6 +136,9 @@ class Frame(wx.Frame):
 
     def OnDoLoan(self,event):
         window = NewLoanWindow(self)
+        window.Show()
+    def OnReturnBook(self,event):
+        window = ReturnBookWindow(self)
         window.Show()
     def OnClose(self, event):
         dlg = wx.MessageDialog(self,

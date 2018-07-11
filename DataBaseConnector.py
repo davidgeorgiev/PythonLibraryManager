@@ -318,6 +318,24 @@ class DataBaseConnector():
             all_books.append(str(row[0]).decode("utf8") +" "+ str(row[1]).decode("utf8"))
         self.lastResult = all_books
         return self.lastResult
+    def GetAllLoanedBookIdsByUserWithId(self,user_id):
+        all_loan_ids = list()
+        cur = self.db.cursor()
+        cur.execute("SELECT loan.book_id,loan.id,loan.loan_date,loan.return_period FROM loan WHERE loan.user_id = "+user_id+" AND loan.is_returned = 0;")
+        for row in cur.fetchall():
+            all_loan_ids.append([str(row[0]).decode("utf8"),str(row[1]).decode("utf8"),str(row[2]).decode("utf8"),str(row[3]).decode("utf8")])
+        self.lastResult = all_loan_ids
+        return self.lastResult
+    def GetAllBookIdsAndNamesLoanedByUserWithId(self,user_id):
+        all_books = list()
+        cur = self.db.cursor()
+        my_list_of_loaned_books = self.GetAllLoanedBookIdsByUserWithId(user_id)
+        for i in my_list_of_loaned_books:
+            cur.execute("SELECT * FROM `book` WHERE book.id = "+i[0]+";")
+            for row in cur.fetchall():
+                all_books.append(str(i[1])+" "+str(i[2])+" "+str(i[3])+" "+str(row[0]).decode("utf8") +" "+ str(row[1]).decode("utf8"))
+        self.lastResult = all_books
+        return self.lastResult
     def GetAllBookIdsAndNamesByAuthorWithId(self,author_id):
         all_books = list()
         cur = self.db.cursor()
@@ -379,4 +397,8 @@ class DataBaseConnector():
         self.lastResult = number_of_books_available_in_library
         return self.lastResult
 
-        return "NULL"
+    def EditLoanOnReturningABook(self,id):
+        cur = self.db.cursor()
+        cur.execute("UPDATE `loan` SET `is_returned` = 1, `returned_on_date` = \""+str(datetime.date.today())+"\" WHERE id = "+str(id)+";")
+        self.db.commit()
+        cur.close()
