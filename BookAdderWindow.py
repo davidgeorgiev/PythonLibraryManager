@@ -24,7 +24,7 @@ class BookAdderWindow(wx.Frame):
         box = self.GetManagerBoxSizer(panel)
         panel.SetSizer(box)
         panel.Layout()
-
+        self.panel = panel
     def AppendToCurrentBookGenreIds(self,var):
         self.currentBookGenreIds.append(var)
     def AppendToCurrentBookAuthorIds(self,var):
@@ -127,11 +127,13 @@ class BookAdderWindow(wx.Frame):
         return_list.append(self.myOtherMethods.AddQuotes(self.price_input.GetValue()))
         return return_list
     def OnAdd(self,event):
-        book_index = self.myDataBaseConnector.AddBook(self.GetDataFromFields())
-        self.myDataBaseConnector.AddGenresToBookWithId(book_index,self.currentBookGenreIds)
-        self.myDataBaseConnector.AddAuthorsToBookWithId(book_index,self.currentBookAuthorIds)
-        self.parent.myFormatedInfoGetter.UpdateMainInfo()
-        self.Destroy()
+        my_data = self.GetDataFromFields()
+        if (self.myOtherMethods.CheckIfSomeOfStringsInListIsEmpty(my_data,self.panel) == 0):
+            book_index = self.myDataBaseConnector.AddBook(my_data)
+            self.myDataBaseConnector.AddGenresToBookWithId(book_index,self.currentBookGenreIds)
+            self.myDataBaseConnector.AddAuthorsToBookWithId(book_index,self.currentBookAuthorIds)
+            self.parent.myFormatedInfoGetter.UpdateMainInfo()
+            self.Destroy()
     def InitMyWindow(self,title):
         wx.Frame.__init__(self, None, title=title, size=(460,600))
         self.Center()

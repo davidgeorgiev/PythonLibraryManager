@@ -55,7 +55,7 @@ class LogInWindow(wx.Frame):
         user_name = "admin"
         password = "admin123"
         if(myInfo[0] == user_name) and (myInfo[1] == password):
-            top = Frame("Организатор за библиотека v1.1".decode('utf8'))
+            top = Frame("Организатор за библиотека v1.3".decode('utf8'))
             top.Show()
             self.Destroy()
         else:

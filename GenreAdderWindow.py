@@ -14,6 +14,7 @@ class GenreAdderWindow(wx.Frame):
         box = self.GetManagerBoxSizer(panel)
         panel.SetSizer(box)
         panel.Layout()
+        self.panel = panel
     def GetManagerBoxSizer(self,panel):
         manager_box = wx.BoxSizer(wx.VERTICAL)
         m_text = wx.StaticText(panel, -1, "ДОБАВИ ЖАНР".decode('utf8'))
@@ -40,9 +41,11 @@ class GenreAdderWindow(wx.Frame):
         return_list.append(self.myOtherMethods.AddQuotes(self.genre_input.GetValue()))
         return return_list
     def OnAdd(self,event):
-        self.myDataBaseConnector.AddGenre(self.GetDataFromFields())
-        self.parent.myFormatedInfoGetter.UpdateMainInfo()
-        self.Destroy()
+        my_data = self.GetDataFromFields()
+        if (self.myOtherMethods.CheckIfSomeOfStringsInListIsEmpty(my_data,self.panel) == 0):
+            self.myDataBaseConnector.AddGenre(my_data)
+            self.parent.myFormatedInfoGetter.UpdateMainInfo()
+            self.Destroy()
     def InitMyWindow(self,title):
         wx.Frame.__init__(self, None, title=title, size=(460,380))
         self.Center()
