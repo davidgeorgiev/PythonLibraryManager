@@ -26,6 +26,7 @@ class LogInWindow(wx.Frame):
         username_label.SetSize(username_label.GetBestSize())
         username_box.Add(username_label, 0, wx.ALL, 10)
         self.username_input = wx.TextCtrl(panel, -1, size=(140,-1))
+        self.username_input.SetValue("admin")
         username_box.Add(self.username_input, 0, wx.ALL, 10)
         manager_box.Add(username_box, 0, wx.LEFT, 10)
 
@@ -35,6 +36,7 @@ class LogInWindow(wx.Frame):
         password_label.SetSize(password_label.GetBestSize())
         password_box.Add(password_label, 0, wx.ALL, 10)
         self.password_input = wx.TextCtrl(panel, -1, size=(140,-1),style=wx.TE_PASSWORD)
+        self.password_input.SetValue("admin123")
         password_box.Add(self.password_input, 0, wx.ALL, 10)
         manager_box.Add(password_box, 0, wx.LEFT, 10)
 
@@ -49,11 +51,7 @@ class LogInWindow(wx.Frame):
         return_list.append(self.password_input.GetValue())
         return return_list
     def OnLogIn(self,event):
-        top = Frame("Организатор за библиотека v0.1".decode('utf8'))
-        top.Show()
-        #self.Destroy()
-
-        '''myInfo = self.GetDataFromFields()
+        myInfo = self.GetDataFromFields()
         user_name = "admin"
         password = "admin123"
         if(myInfo[0] == user_name) and (myInfo[1] == password):
@@ -63,7 +61,7 @@ class LogInWindow(wx.Frame):
         else:
             md = wx.MessageDialog(self, "Грешни данни. Програмата ще бъде затворена.".decode('utf8'), caption="Грешни данни".decode('utf8'),style=wx.OK|wx.CENTRE)
             md.ShowModal()
-            sys.exit(1)'''
+            sys.exit(1)
     def InitMyWindow(self,title):
         wx.Frame.__init__(self, None, title=title, size=(460,380))
         self.Center()
