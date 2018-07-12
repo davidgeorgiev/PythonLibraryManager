@@ -3,6 +3,7 @@
 import wx, wx.html
 from DataBaseConnector import DataBaseConnector
 from OtherMethods import OtherMethods
+from UserManagerWindow import UserManagerWindow
 
 class BookInfoWindow(wx.Frame):
     def __init__(self,parent,book_id):
@@ -76,11 +77,18 @@ class BookInfoWindow(wx.Frame):
 
         manager_box.Add(genre_author_box, 0, wx.ALL, 10)
 
+        show_loans_button = wx.Button(panel, wx.ID_CLOSE, "Заета от".decode('utf8'))
+        show_loans_button.Bind(wx.EVT_BUTTON, self.OnShowLoans)
+        manager_box.Add(show_loans_button, 0, wx.ALL, 10)
+
         add_button = wx.Button(panel, wx.ID_CLOSE, "Изтрий книгата".decode('utf8'))
         add_button.Bind(wx.EVT_BUTTON, self.OnDelete)
         manager_box.Add(add_button, 0, wx.ALL, 10)
 
         return manager_box
+    def OnShowLoans(self,event):
+        window = UserManagerWindow(self,loans_book_id = self.book_id)
+        window.Show()
     def GetDataFromFields(self):
         return_list = list()
         return_list.append(self.myOtherMethods.AddQuotes(self.genre_input.GetValue()))

@@ -3,7 +3,10 @@
 import wx, wx.html
 from DataBaseConnector import DataBaseConnector
 from OtherMethods import OtherMethods
-from BookInfoWindow import BookInfoWindow
+try:
+    from BookInfoWindow import BookInfoWindow
+except:
+    pass
 
 class LoanedBookManagerWindow(wx.Frame):
     def __init__(self,parent,user_id):

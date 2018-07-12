@@ -490,3 +490,11 @@ class DataBaseConnector():
             all_books.append(str(row[0]).decode("utf8") +" "+ str(row[1]).decode("utf8"))
         self.lastResult = all_books
         return self.lastResult
+    def GetAllUsersLoanedBookWithId(self,book_id):
+        user_ids = list()
+        cur = self.db.cursor()
+        cur.execute('SELECT * FROM user WHERE id IN (SELECT loan.user_id FROM loan WHERE loan.book_id = '+book_id+' AND loan.is_returned = 0)')
+        for row in cur.fetchall():
+            user_ids.append(str(row[1]).decode("utf8") +" "+ str(row[2]).decode("utf8") +" "+ str(row[3]).decode("utf8") +" "+ str(row[0]).decode("utf8"))
+        self.lastResult = user_ids
+        return self.lastResult
