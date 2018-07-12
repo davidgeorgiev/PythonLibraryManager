@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import wx, wx.html
+import sys
 class OtherMethods():
     def __init__(self,parent):
         self.parent = parent
@@ -17,4 +18,11 @@ class OtherMethods():
                 msg.ShowModal()
                 msg.Destroy()
                 return 1
+        return 0
+    def CheckSizeOfString(self,in_string,in_message,byte_limit,panel):
+        if sys.getsizeof(in_string)>byte_limit:
+            msg = wx.MessageDialog(panel,in_message.decode('utf8'),"Грешка".decode('utf8'),wx.OK | wx.ICON_ERROR)
+            msg.ShowModal()
+            msg.Destroy()
+            return 1
         return 0

@@ -128,7 +128,7 @@ class BookAdderWindow(wx.Frame):
         return return_list
     def OnAdd(self,event):
         my_data = self.GetDataFromFields()
-        if (self.myOtherMethods.CheckIfSomeOfStringsInListIsEmpty(my_data,self.panel) == 0):
+        if (self.myOtherMethods.CheckSizeOfString(my_data[2],"Анотацията е прекалено дълга",2048,self.panel) == 0) and (self.myOtherMethods.CheckIfSomeOfStringsInListIsEmpty(my_data,self.panel) == 0):
             book_index = self.myDataBaseConnector.AddBook(my_data)
             self.myDataBaseConnector.AddGenresToBookWithId(book_index,self.currentBookGenreIds)
             self.myDataBaseConnector.AddAuthorsToBookWithId(book_index,self.currentBookAuthorIds)
