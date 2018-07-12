@@ -34,11 +34,31 @@ class DataBaseConnector():
         for row in cur.fetchall():
             self.lastResult = [str(row[0]),str(row[1]),str(row[2]),str(row[3]),str(row[4]),str(row[5]),str(row[6])]
         return self.lastResult
+    def DeleteLoansOfUserWithId(self,user_id):
+        cur = self.db.cursor()
+        cur.execute("DELETE FROM loan WHERE loan.user_id = "+str(user_id)+";")
+
+        self.db.commit()
+        cur.close()
+    def DeleteReadingCardOfUserWithId(self,user_id):
+        cur = self.db.cursor()
+        reading_card_id = self.GetReadingCardIdOfUserWithId(user_id)
+        cur.execute("DELETE FROM reading_card WHERE reading_card.id = "+str(reading_card_id)+";")
+        self.db.commit()
+        cur.close()
+    def GetReadingCardIdOfUserWithId(self,user_id):
+        cur = self.db.cursor()
+        cur.execute("SELECT reading_card_id FROM `user` WHERE `id` = "+str(user_id)+";")
+        for row in cur.fetchall():
+            self.lastResult = str(row[0])
+        return self.lastResult
     def DeleteUser(self,id):
+        self.DeleteLoansOfUserWithId(id)
         cur = self.db.cursor()
         cur.execute("DELETE FROM `user` WHERE `id` = "+str(id)+";")
         self.db.commit()
         cur.close()
+        self.DeleteReadingCardOfUserWithId(id)
     def EditUser(self,id,dataList):
         cur = self.db.cursor()
         cur.execute("UPDATE `user` SET `first_name` = "+dataList[0]+", `middle_name` = "+dataList[1]+", `last_name` = "+dataList[2]+", `phone` = "+dataList[3]+", `e_mail` = "+dataList[4]+" WHERE id = "+str(id)+";")
@@ -88,7 +108,25 @@ class DataBaseConnector():
         info_list.append(authors_list)
         info_list[2] = self.GetPublisherInfo(info_list[2])[1]
         return info_list
+    def DeleteBookGenreByBookId(self,book_id):
+        cur = self.db.cursor()
+        cur.execute("DELETE FROM `book_genre` WHERE `book_id` = "+str(book_id)+";")
+        self.db.commit()
+        cur.close()
+    def DeleteBookAuthorByBookId(self,book_id):
+        cur = self.db.cursor()
+        cur.execute("DELETE FROM `book_author` WHERE `book_id` = "+str(book_id)+";")
+        self.db.commit()
+        cur.close()
+    def DeleteLoanByBookId(self,book_id):
+        cur = self.db.cursor()
+        cur.execute("DELETE FROM `loan` WHERE `book_id` = "+str(book_id)+";")
+        self.db.commit()
+        cur.close()
     def DeleteBook(self,id):
+        self.DeleteBookGenreByBookId(id)
+        self.DeleteBookAuthorByBookId(id)
+        self.DeleteLoanByBookId(id)
         cur = self.db.cursor()
         cur.execute("DELETE FROM `book` WHERE `id` = "+str(id)+";")
         self.db.commit()
@@ -401,7 +439,10 @@ class DataBaseConnector():
         number_of_books_available_in_library = 0
         cur.execute("SELECT SUM(book.number_of_copies)-(SELECT COUNT(*) FROM loan WHERE loan.is_returned = 0) FROM book;")
         for row in cur.fetchall():
-             number_of_books_available_in_library = int(row[0])
+            try:
+                number_of_books_available_in_library = int(row[0])
+            except:
+                pass
         self.lastResult = number_of_books_available_in_library
         return self.lastResult
 

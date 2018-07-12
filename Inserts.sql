@@ -1,42 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 4.8.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: 11 юли 2018 в 20:46
--- Версия на сървъра: 10.1.33-MariaDB
--- PHP Version: 7.2.6
-
-DROP DATABASE IF EXISTS library_manager_db;
-CREATE DATABASE library_manager_db;
 USE library_manager_db;
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `library_manager_db`
---
-
--- --------------------------------------------------------
-
---
--- Структура на таблица `authors`
---
-
-CREATE TABLE `authors` (
-  `id` int(11) NOT NULL,
-  `first_name` varbinary(1024) DEFAULT NULL,
-  `last_name` varbinary(1024) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Схема на данните от таблица `authors`
@@ -48,20 +10,15 @@ INSERT INTO `authors` (`id`, `first_name`, `last_name`) VALUES
 (22, 0xd0a5d0b0d0bdd181, 0xd09ad180d0b8d181d182d0b8d0b0d0bd20d090d0bdd0b4d0b5d180d181d0b5d0bd),
 (23, 0xd091d0b5d18ad180, 0xd093d180d0b8d0bbd181);
 
--- --------------------------------------------------------
-
 --
--- Структура на таблица `book`
+-- Схема на данните от таблица `publisher`
 --
 
-CREATE TABLE `book` (
-  `title` varbinary(1024) NOT NULL,
-  `id` int(11) NOT NULL,
-  `publisher_id` int(11) NOT NULL,
-  `anotation` varbinary(2048) NOT NULL,
-  `number_of_copies` int(11) NOT NULL,
-  `price` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+INSERT INTO `publisher` (`id`, `name`, `address`) VALUES
+(22, 0xd0a2d0b5d185d0bdd0b8d187d0b5d181d0bad0b820d183d0bdd0b8d0b2d0b5d180d181d0b8d182d0b5d182202d20d0a1d0bed184d0b8d18f, 0xd0a1d0bed184d0b8d18f),
+(23, 0xd09fd090d09d, 0xd0a1d0bed184d0b8d18f),
+(24, 0xd092d0b0d0bad0bed0bd, 0xd0a1d0bed184d0b8d18f);
+
 
 --
 -- Схема на данните от таблица `book`
@@ -70,18 +27,9 @@ CREATE TABLE `book` (
 INSERT INTO `book` (`title`, `id`, `publisher_id`, `anotation`, `number_of_copies`, `price`) VALUES
 (0xd09cd0bed182d0bed186d0b8d0bad0bbd0b5d182d0b820d0b820d181d0bfd0bed180d182d0bdd0bed181d18ad181d182d0b5d0b7d0b0d182d0b5d0bbd0bdd0b820d0b0d0b2d182d0bed0bcd0bed0b1d0b8d0bbd0b8, 26, 22, 0xd0a3d187d0b5d0b1d0bdd0b8d0bad18ad18220d0b520d181d18ad181d182d0b0d0b2d0b5d0bd20d0b220d181d18ad0bed182d0b2d0b5d182d181d182d0b2d0b8d0b520d18120d183d182d0b2d18ad180d0b4d0b5d0bdd0b0d182d0b020d183d187d0b5d0b1d0bdd0b020d0bfd180d0bed0b3d180d0b0d0bcd0b020d0bfd0be20d0b4d0b8d181d186d0b8d0bfd0bbd0b8d0bdd0b0d182d0b020d09cd0bed182d0bed186d0b8d0bad0bbd0b5d182d0b820d0b820d181d0bfd0bed180d182d0bdd0bed181d18ad181d182d0b5d0b7d0b0d182d0b5d0bbd0bdd0b820d0b0d0b2d182d0bed0bcd0bed0b1d0b8d0bbd0b820d0b820d0b520d0bfd180d0b5d0b4d0bdd0b0d0b7d0bdd0b0d187d0b5d0bd20d0b7d0b020d181d182d183d0b4d0b5d0bdd182d0b820d0bed18220d181d0bfd0b5d186d0b8d0b0d0bbd0bdd0bed181d182d182d0b020d0a2d180d0b0d0bdd181d0bfd0bed180d182d0bdd0b020d182d0b5d185d0bdd0b8d0bad0b020d0b820d182d0b5d185d0bdd0bed0bbd0bed0b3d0b8d0b820d0bfd180d0b820d0a2d0b5d185d0bdd0b8d187d0b5d181d0bad0b8d18f20d183d0bdd0b8d0b2d0b5d180d181d0b8d182d0b5d182202d20d0a1d0bed184d0b8d18f2c20d0bdd0be20d0bcd0bed0b6d0b520d0b4d0b020d181d0b520d0bfd0bed0bbd0b7d0b2d0b020d0b820d0bed18220d181d182d183d0b4d0b5d0bdd182d0b8d182d0b520d0bed18220d0b4d180d183d0b3d0b820d181d0bfd0b5d186d0b8d0b0d0bbd0bdd0bed181d182d0b82c20d0b8d0b7d183d187d0b0d0b2d0b0d189d0b820d0b0d0b2d182d0bed0bcd0bed0b1d0b8d0bbd0b82c20d0bad0b0d0bad182d0be20d0b820d0bed18220d181d0bfd0b5d186d0b8d0b0d0bbd0b8d181d182d0b8d182d0b52c20d180d0b0d0b1d0bed182d0b5d189d0b820d0b220d0bed0b1d0bbd0b0d181d182d182d0b020d0bdd0b020d0b0d0b2d182d0bed0bcd0bed0b1d0b8d0bbd0bdd0b0d182d0b020d0b820d0bcd0bed182d0bed186d0b8d0bad0bbd0b5d182d0bdd0b0d182d0b020d182d0b5d185d0bdd0b8d0bad0b02e, 10, 2.9),
 (0xd098d0b7d0b1d180d0b0d0bdd0b820d0bfd180d0b8d0bad0b0d0b7d0bad0b820d0bed18220d0a5d0b0d0bdd18120d09ad180d0b8d181d182d0b8d0b0d0bd20d090d0bdd0b4d0b5d180d181d0b5d0bd, 27, 23, 0xd0a5d0b0d0bdd18120d09ad180d0b8d181d182d0b8d0b0d0bd20d090d0bdd0b4d0b5d180d181d0b5d0bd2028313830352d313837352920d0b520d180d0bed0b4d0b5d0bd20d0b220d0b4d0b0d182d181d0bad0b8d18f20d0b3d180d0b0d0b420d09ed0b4d0b5d0bdd0b7d0b52e20d09dd0b0d0b92dd0b2d0b5d0bbd0b8d0bad0b8d18fd18220d180d0b0d0b7d0bad0b0d0b7d0b2d0b0d18720d0bdd0b020d0bfd180d0b8d0bad0b0d0b7d0bad0b820d0b520d181d0b8d0bd20d0bdd0b020d0bed0b1d183d189d0b0d1802e20d094d0b5d182d181d182d0b2d0bed182d0be20d0bcd18320d0bfd180d0b5d0bcd0b8d0bdd0b0d0b2d0b020d0b220d0b5d0b4d0bdd0b02dd0b5d0b4d0b8d0bdd181d182d0b2d0b5d0bdd0b020d181d182d0b0d0b8d187d0bad0b02c20d0bfd0bed187d182d0b820d186d18fd0bbd0b0d182d0b020d0b7d0b0d0b5d182d0b020d0bed18220d0bed0b1d183d189d0b0d180d181d0bad0b8d18f20d182d0b5d0b7d0b3d18fd1852e20d0a1d0b0d0bcd0be20d0bdd0b020d187d0b5d182d0b8d180d0b8d0bdd0b0d0b4d0b5d181d0b5d18220d0b3d0bed0b4d0b8d0bdd0b82c20d0b1d0b5d0b720d0bfd0b0d180d0b820d0b820d0bfd180d0b5d0bfd0b8d182d0b0d0bdd0b8d0b52c20d090d0bdd0b4d0b5d180d181d0b5d0bd20d181d0b520d0bed0b7d0bed0b2d0b0d0b2d0b020d0b220d181d182d0bed0bbd0b8d186d0b0d182d0b020d09ad0bed0bfd0b5d0bdd185d0b0d0b3d0b5d0bd2e20d091d0bbd0b0d0b3d0bed0b4d0b0d180d0b5d0bdd0b8d0b520d0bdd0b020d0b4d0b0d180d0b1d0b0d182d0b020d181d0b820d0b820d18120d0bfd0bed0bcd0bed189d182d0b020d0bdd0b020d0b2d0bbd0b8d18fd182d0b5d0bbd0bdd0b820d0b1d0bbd0b0d0b3d0bed0b4d0b5d182d0b5d0bbd0b82c20d0bfd0bed0bbd183d187d0b0d0b2d0b020d0b4d0bed0b1d180d0be20d0bed0b1d180d0b0d0b7d0bed0b2d0b0d0bdd0b8d0b52e20d0a1d18ad0b7d0b4d0b0d0b2d0b020d0b3d0bed0bbd18fd0bcd0be20d0bfd0be20d0bed0b1d0b5d0bc20d182d0b2d0bed180d187d0b5d181d182d0b2d0be2c20d0bdd0be20d181d0b2d0b5d182d0bed0b2d0bdd0b020d181d0bbd0b0d0b2d0b020d0bcd18320d0b4d0bed0bdd0b0d181d18fd18220d0bdd0b5d0b3d0bed0b2d0b8d182d0b520d187d183d0b4d0bdd0b820d0bfd180d0b8d0bad0b0d0b7d0bad0b82e20d09220d182d0bed0b7d0b820d182d0bed0bc20d181d0b020d181d18ad0b1d180d0b0d0bdd0b820d0bdd0b0d0b92dd185d183d0b1d0b0d0b2d0b8d182d0b520d0bfd180d0b8d0bad0b0d0b7d0bad0b820d0bdd0b020d0b2d0b5d0bbd0b8d0bad0b8d18f20d0bfd0b8d181d0b0d182d0b5d0bb2e, 3, 2.9),
-(0xd0a0d0bed0b4d0b5d0bd20d0b4d0b020d0bed186d0b5d0bbd18fd0b2d0b0, 28, 24, 0xd09dd0b0d0b92dd0b4d0bed0b1d180d0b8d182d0b520d182d0b5d185d0bdd0b8d0bad0b820d0b7d0b020d0bed186d0b5d0bbd18fd0b2d0b0d0bdd0b520d0b220d0b4d0b8d0b2d0b0d182d0b020d0bfd180d0b8d180d0bed0b4d0b02e0a0ad096d0b5d181d182d0bed0bad0b820d0bfd183d181d182d0b8d0bdd0b82c20d0bdd0b5d0bfd180d0bed185d0bed0b4d0b8d0bcd0b820d0b4d0b6d183d0bdd0b3d0bbd0b82c20d0bad0bed0b2d0b0d180d0bdd0b820d0bbd0b5d0b4d0bed0b2d0b520d0b820d181d0b2d0b8d180d0b5d0bfd0b820d185d0b8d189d0bdd0b8d186d0b8202d20d091d0b5d18ad18020d093d180d0b8d0bbd18120d0bdd0b820d180d0b0d0b7d0bad180d0b8d0b2d0b020d0bad0b0d0ba20d0b4d0b020d0bed186d0b5d0bbd0b5d0b5d0bc20d0bdd0b020d180d18ad0b1d0b02e0a0ad09ad0b0d182d0b0d181d182d180d0bed184d0b8d182d0b520d0bcd0bed0b3d0b0d18220d0b4d0b020d181d0b520d181d0bbd183d187d0b0d18220d0b820d187d0b5d181d182d0be20d181d0b520d181d0bbd183d187d0b2d0b0d1822e20d09dd0b8d0bad0bed0b920d0bed18220d0bdd0b0d18120d0bdd0b520d0b520d0b8d0bcd183d0bdd0b8d0b7d0b8d180d0b0d0bd20d181d180d0b5d189d18320d0b2d0bdd0b5d0b7d0b0d0bfd0bdd0b8d182d0b520d0bed0b1d180d0b0d182d0b820d0bdd0b020d181d18ad0b4d0b1d0b0d182d0b02e20d0a0d0bed0b4d0b5d0bd20d0b4d0b020d0bed186d0b5d0bbd18fd0b2d0b020d0b520d0bfd180d0b0d0bad182d0b8d187d0b5d0bd20d0bdd0b0d180d18ad187d0bdd0b8d0ba20d181d18ad18120d181d18ad0b2d0b5d182d0b820d0b7d0b020d0bed186d0b5d0bbd18fd0b2d0b0d0bdd0b52c20d0bad0bed0b9d182d0be20d189d0b520d0b2d0b820d0bfd0bed0bcd0bed0b3d0bdd0b520d0b4d0b020d181d0b520d181d0bfd180d0b0d0b2d0b8d182d0b520d0b820d0bfd180d0b820d0bdd0b0d0b92dd0bbd0bed188d0b8d18f20d181d186d0b5d0bdd0b0d180d0b8d0b92e0a0ad09ed18220d181d182d180d0b0d0bdd0b8d186d0b8d182d0b520d0bdd0b020d182d0b0d0b7d0b820d0bad0bdd0b8d0b3d0b020d189d0b520d0bdd0b0d183d187d0b8d182d0b520d0bad0b0d0ba20d0b4d0b020d181d0b820d0bfd0bed181d182d180d0bed0b8d182d0b520d181d0b8d0b3d183d180d0b5d0bd20d0bfd0bed0b4d181d0bbd0bed0bd20d18120d0bfd0bed0b4d180d18ad187d0bdd0b820d0bcd0b0d182d0b5d180d0b8d0b0d0bbd0b82c20d0bad0b0d0ba20d0b4d0b020d0b7d0b0d0bfd0b0d0bbd0b8d182d0b520d0bed0b3d18ad0bd20d0b1d0b5d0b720d0bad0b8d0b1d180d0b8d1822c20d0bad0b0d0ba20d0b4d0b020d181d0b520d0bfd180d0b8d0b4d0b2d0b8d0b6d0b2d0b0d182d0b520d0b820d0bed180d0b8d0b5d0bdd182d0b8d180d0b0d182d0b520d0b2d18ad0b220d0b2d181d18fd0bad0b0d0bad0b2d0b820d182d0b5d180d0b5d0bdd0b820d0b820d0bed189d0b520d186d18fd0bb20d0bad183d0bf20d0b8d0b7d0bfd0b8d182d0b0d0bdd0b820d182d0b5d185d0bdd0b8d0bad0b820d0b7d0b020d0bed186d0b5d0bbd18fd0b2d0b0d0bdd0b520d0b220d0b4d0b8d0b2d0b0d182d0b020d0bfd180d0b8d180d0bed0b4d0b02e20d095d0bad181d0bfd0b5d180d182d18ad18220d0bfd0be20d0bed186d0b5d0bbd18fd0b2d0b0d0bdd0b520d091d0b5d18ad18020d093d180d0b8d0bbd18120d0bdd0b820d0bfd0bed0bad0b0d0b7d0b2d0b02c20d187d0b52c20d0b2d18ad0bed180d18ad0b6d0b5d0bdd0b820d18120d0bfd180d0b0d0b2d0b8d0bbd0bdd0b8d182d0b520d0b7d0bdd0b0d0bdd0b8d18f20d0b820d0bdd0b5d181d0bbd0bed0bcd0b8d0bcd0b0d182d0b020d0b2d0bed0bbd18f20d0b4d0b020d181d0b520d181d0bfd0b0d181d0b8d0bc2c20d0b2d181d0b8d187d0bad0b820d0bdd0b8d0b520d0b8d0bcd0b0d0bcd0b520d0bfd0bed182d0b5d0bdd186d0b8d0b0d0bbd0b020d0b4d0b020d181d0b520d181d0bfd180d0b0d0b2d0b8d0bc20d18120d0bdd0b5d0b2d18ad0bed0b1d180d0b0d0b7d0b8d0bcd0b820d0bfd180d0b5d0b4d0b8d0b7d0b2d0b8d0bad0b0d182d0b5d0bbd181d182d0b2d0b0202d20d0bed18220d0bfd180d0b5d0bad0bed181d18fd0b2d0b0d0bdd0b520d0bdd0b020d181d0bcd18ad180d182d0bed0bdd0bed181d0bdd0b820d180d0b5d0bad0b820d0b820d183d0b1d0b8d0b2d0b0d0bdd0b520d0bdd0b020d0bed182d180d0bed0b2d0bdd0b820d0b7d0bcd0b8d0b820d0b4d0be20d181d180d0b5d189d0b020d18120d0bcd0b5d187d0bad0b020d0b3d180d0b8d0b7d0bbd0b820d0b820d0b8d0b7d0b1d18fd0b3d0b2d0b0d0bdd0b520d0bdd0b020d0bbd0b0d0b2d0b8d0bdd0b02e, 8, 25);
-
--- --------------------------------------------------------
-
---
--- Структура на таблица `book_author`
---
-
-CREATE TABLE `book_author` (
-  `author_id` int(11) NOT NULL,
-  `book_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+(0xd0a0d0bed0b4d0b5d0bd20d0b4d0b020d0bed186d0b5d0bbd18fd0b2d0b0, 28, 24, 0xd09dd0b0d0b92dd0b4d0bed0b1d180d0b8d182d0b520d182d0b5d185d0bdd0b8d0bad0b820d0b7d0b020d0bed186d0b5d0bbd18fd0b2d0b0d0bdd0b520d0b220d0b4d0b8d0b2d0b0d182d0b020d0bfd180d0b8d180d0bed0b4d0b02e0a0ad096d0b5d181d182d0bed0bad0b820d0bfd183d181d182d0b8d0bdd0b82c20d0bdd0b5d0bfd180d0bed185d0bed0b4d0b8d0bcd0b820d0b4d0b6d183d0bdd0b3d0bbd0b82c20d0bad0bed0b2d0b0d180d0bdd0b820d0bbd0b5d0b4d0bed0b2d0b520d0b820d181d0b2d0b8d180d0b5d0bfd0b820d185d0b8d189d0bdd0b8d186d0b8202d20d091d0b5d18ad18020d093d180d0b8d0bbd18120d0bdd0b820d180d0b0d0b7d0bad180d0b8d0b2d0b020d0bad0b0d0ba20d0b4d0b020d0bed186d0b5d0bbd0b5d0b5d0bc20d0bdd0b020d180d18ad0b1d0b02e0a0ad09ad0b0d182d0b0d181d182d180d0bed184d0b8d182d0b520d0bcd0bed0b3d0b0d18220d0b4d0b020d181d0b520d181d0bbd183d187d0b0d18220d0b820d187d0b5d181d182d0be20d181d0b520d181d0bbd183d187d0b2d0b0d1822e20d09dd0b8d0bad0bed0b920d0bed18220d0bdd0b0d18120d0bdd0b520d0b520d0b8d0bcd183d0bdd0b8d0b7d0b8d180d0b0d0bd20d181d180d0b5d189d18320d0b2d0bdd0b5d0b7d0b0d0bfd0bdd0b8d182d0b520d0bed0b1d180d0b0d182d0b820d0bdd0b020d181d18ad0b4d0b1d0b0d182d0b02e20d0a0d0bed0b4d0b5d0bd20d0b4d0b020d0bed186d0b5d0bbd18fd0b2d0b020d0b520d0bfd180d0b0d0bad182d0b8d187d0b5d0bd20d0bdd0b0d180d18ad187d0bdd0b8d0ba20d181d18ad18120d181d18ad0b2d0b5d182d0b820d0b7d0b020d0bed186d0b5d0bbd18fd0b2d0b0d0bdd0b52c20d0bad0bed0b9d182d0be20d189d0b520d0b2d0b820d0bfd0bed0bcd0bed0b3d0bdd0b520d0b4d0b020d181d0b520d181d0bfd180d0b0d0b2d0b8d182d0b520d0b820d0bfd180d0b820d0bdd0b0d0b92dd0bbd0bed188d0b8d18f20d181d186d0b5d0bdd0b0d180d0b8d0b92e0a0ad09ed18220d181d182d180d0b0d0bdd0b8d186d0b8d182d0b520d0bdd0b020d182d0b0d0b7d0b820d0bad0bdd0b8d0b3d0b020d189d0b520d0bdd0b0d183d187d0b8d182d0b520d0bad0b0d0ba20d0b4d0b020d181d0b820d0bfd0bed181d182d180d0bed0b8d182d0b520d181d0b8d0b3d183d180d0b5d0bd20d0bfd0bed0b4d181d0bbd0bed0bd20d18120d0bfd0bed0b4d180d18ad187d0bdd0b820d0bcd0b0d182d0b5d180d0b8d0b0d0bbd0b82c20d0bad0b0d0ba20d0b4d0b020d0b7d0b0d0bfd0b0d0bbd0b8d182d0b520d0bed0b3d18ad0bd20d0b1d0b5d0b720d0bad0b8d0b1d180d0b8d1822c20d0bad0b0d0ba20d0b4d0b020d181d0b520d0bfd180d0b8d0b4d0b2d0b8d0b6d0b2d0b0d182d0b520d0b820d0bed180d0b8d0b5d0bdd182d0b8d180d0b0d182d0b520d0b2d18ad0b220d0b2d181d18fd0bad0b0d0bad0b2d0b820d182d0b5d180d0b5d0bdd0b820d0b820d0bed189d0b520d186d18fd0bb20d0bad183d0bf20d0b8d0b7d0bfd0b8d182d0b0d0bdd0b820d182d0b5d185d0bdd0b8d0bad0b820d0b7d0b020d0bed186d0b5d0bbd18fd0b2d0b0d0bdd0b520d0b220d0b4d0b8d0b2d0b0d182d0b020d0bfd180d0b8d180d0bed0b4d0b02e20d095d0bad181d0bfd0b5d180d182d18ad18220d0bfd0be20d0bed186d0b5d0bbd18fd0b2d0b0d0bdd0b520d091d0b5d18ad18020d093d180d0b8d0bbd18120d0bdd0b820d0bfd0bed0bad0b0d0b7d0b2d0b02c20d187d0b52c20d0b2d18ad0bed180d18ad0b6d0b5d0bdd0b820d18120d0bfd180d0b0d0b2d0b8d0bbd0bdd0b8d182d0b520d0b7d0bdd0b0d0bdd0b8d18f20d0b820d0bdd0b5d181d0bbd0bed0bcd0b8d0bcd0b0d182d0b020d0b2d0bed0bbd18f20d0b4d0b020d181d0b520d181d0bfd0b0d181d0b8d0bc2c20d0b2d181d0b8d187d0bad0b820d0bdd0b8d0b520d0b8d0bcd0b0d0bcd0b520d0bfd0bed182d0b5d0bdd186d0b8d0b0d0bbd0b020d0b4d0b020d181d0b520d181d0bfd180d0b0d0b2d0b8d0bc20d18120d0bdd0b5d0b2d18ad0bed0b1d180d0b0d0b7d0b8d0bcd0b820d0bfd180d0b5d0b4d0b8d0b7d0b2d0b8d0bad0b0d182d0b5d0bbd181d182d0b2d0b0202d20d0bed18220d0bfd180d0b5d0bad0bed181d18fd0b2d0b0d0bdd0b520d0bdd0b020d181d0bcd18ad180d182d0bed0bdd0bed181d0bdd0b820d180d0b5d0bad0b820d0b820d183d0b1d0b8d0b2d0b0d0bdd0b520d0bdd0b020d0bed182d180d0bed0b2d0bdd0b820d0b7d0bcd0b8d0b820d0b4d0be20d181d180d0b5d189d0b020d18120d0bcd0b5d187d0bad0b020d0b3d180d0b8d0b7d0bbd0b820d0b820d0b8d0b7d0b1d18fd0b3d0b2d0b0d0bdd0b520d0bdd0b020d0bbd0b0d0b2d0b8d0bdd0b02e, 8, 25),
+(0xd097d0b0d0b3d0bbd0b0d0b2d0b8d0b5, 30, 22, 0xd09dd0b0d0bad0b0d0bad18ad0b220d182d0b5d0bad181d182, 5, 3.2),
+(0xd097d0b0d0b3d0bbd0b0d0b2d0b8d0b5, 31, 23, 0xd09ed0bfd0b8d181d0b0d0bdd0b8d0b520d0b1d0b5d0b720d0bad0b0d0b2d0b8d187d0bad0b820d0b7d0b0d189d0bed182d0be20d0bad180d0b0d188d0b2d0b0, 5, 2.4);
 
 --
 -- Схема на данните от таблица `book_author`
@@ -91,40 +39,12 @@ INSERT INTO `book_author` (`author_id`, `book_id`) VALUES
 (20, 26),
 (21, 26),
 (22, 27),
-(23, 28);
-
--- --------------------------------------------------------
-
---
--- Структура на таблица `book_genre`
---
-
-CREATE TABLE `book_genre` (
-  `book_id` int(11) NOT NULL,
-  `genre_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Схема на данните от таблица `book_genre`
---
-
-INSERT INTO `book_genre` (`book_id`, `genre_id`) VALUES
-(26, 32),
-(27, 47),
-(27, 31),
-(28, 170),
-(28, 44);
-
--- --------------------------------------------------------
-
---
--- Структура на таблица `genre`
---
-
-CREATE TABLE `genre` (
-  `name` varbinary(1024) NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+(23, 28),
+(21, 29),
+(22, 29),
+(23, 30),
+(22, 31),
+(20, 31);
 
 --
 -- Схема на данните от таблица `genre`
@@ -309,54 +229,22 @@ INSERT INTO `genre` (`name`, `id`) VALUES
 (0xd091d0b8d0bed0b3d180d0b0d184d0b8d0b8, 204),
 (0xd0a2d0b5d0bed180d0b8d18f20d0bdd0b020d0bbd0b8d182d0b5d180d0b0d182d183d180d0b0d182d0b0, 205);
 
--- --------------------------------------------------------
 
 --
--- Структура на таблица `loan`
+-- Схема на данните от таблица `book_genre`
 --
 
-CREATE TABLE `loan` (
-  `user_id` int(11) NOT NULL,
-  `book_id` int(11) NOT NULL,
-  `loan_date` date NOT NULL,
-  `return_period` date NOT NULL,
-  `is_returned` tinyint(1) NOT NULL,
-  `returned_on_date` date DEFAULT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Структура на таблица `publisher`
---
-
-CREATE TABLE `publisher` (
-  `id` int(11) NOT NULL,
-  `name` varbinary(1024) NOT NULL,
-  `address` varbinary(1024) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Схема на данните от таблица `publisher`
---
-
-INSERT INTO `publisher` (`id`, `name`, `address`) VALUES
-(22, 0xd0a2d0b5d185d0bdd0b8d187d0b5d181d0bad0b820d183d0bdd0b8d0b2d0b5d180d181d0b8d182d0b5d182202d20d0a1d0bed184d0b8d18f, 0xd0a1d0bed184d0b8d18f),
-(23, 0xd09fd090d09d, 0xd0a1d0bed184d0b8d18f),
-(24, 0xd092d0b0d0bad0bed0bd, 0xd0a1d0bed184d0b8d18f);
-
--- --------------------------------------------------------
-
---
--- Структура на таблица `reading_card`
---
-
-CREATE TABLE `reading_card` (
-  `id` int(11) NOT NULL,
-  `issue_date` date NOT NULL,
-  `expire_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+INSERT INTO `book_genre` (`book_id`, `genre_id`) VALUES
+(26, 32),
+(27, 47),
+(27, 31),
+(28, 170),
+(28, 44),
+(29, 44),
+(29, 163),
+(30, 70),
+(31, 95),
+(31, 103);
 
 --
 -- Схема на данните от таблица `reading_card`
@@ -365,23 +253,8 @@ CREATE TABLE `reading_card` (
 INSERT INTO `reading_card` (`id`, `issue_date`, `expire_date`) VALUES
 (26, '2018-07-11', '2018-07-28'),
 (27, '2018-07-11', '2018-08-01'),
-(28, '2018-07-11', '2018-08-04');
-
--- --------------------------------------------------------
-
---
--- Структура на таблица `user`
---
-
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `first_name` varbinary(1024) NOT NULL,
-  `middle_name` varbinary(1024) NOT NULL,
-  `last_name` varbinary(1024) NOT NULL,
-  `reading_card_id` int(11) NOT NULL,
-  `phone` varbinary(1024) NOT NULL,
-  `e_mail` varbinary(1024) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+(28, '2018-07-11', '2018-08-04'),
+(29, '2018-07-12', '2018-07-12');
 
 --
 -- Схема на данните от таблица `user`
@@ -389,147 +262,20 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `first_name`, `middle_name`, `last_name`, `reading_card_id`, `phone`, `e_mail`) VALUES
 (23, 0xd0a1d182d0b5d184d0b0d0bd, 0xd098d0b2d0b0d0bdd0bed0b2, 0xd093d0b5d0bed180d0b3d0b8d0b5d0b2, 26, 0x2839343829203335342d32393433, 0x636172726572617340686f746d61696c2e636f6d),
-(24, 0xd09ad0bed0bdd181d182d0b0d0bdd182d0b8d0bd, 0xd094d0b8d0bcd0b8d182d180d0bed0b2, 0xd0a1d182d0bed18fd0bdd0bed0b2, 27, 0x2836383029203932342d34343236, 0x6b6d696c6c6572406d61632e636f6d);
+(24, 0xd09ad0bed0bdd181d182d0b0d0bdd182d0b8d0bd, 0xd094d0b8d0bcd0b8d182d180d0bed0b2, 0xd0a1d182d0bed18fd0bdd0bed0b2, 27, 0x2836383029203932342d34343236, 0x6b6d696c6c6572406d61632e636f6d),
+(26, 0xd094d0b0d0b2d0b8d0b4, 0xd09bd18ad187d0b5d0b7d0b0d180d0bed0b2, 0xd093d0b5d0bed180d0b3d0b8d0b5d0b2, 29, 0x30383933353134313133, 0x64617669642e6c2e67656f726769657640676d61696c2e636f6d);
+
 
 --
--- Indexes for dumped tables
+-- Схема на данните от таблица `loan`
 --
 
---
--- Indexes for table `authors`
---
-ALTER TABLE `authors`
-  ADD KEY `id` (`id`) USING BTREE;
-
---
--- Indexes for table `book`
---
-ALTER TABLE `book`
-  ADD KEY `publisher_id` (`publisher_id`),
-  ADD KEY `id` (`id`) USING BTREE;
-
---
--- Indexes for table `book_author`
---
-ALTER TABLE `book_author`
-  ADD KEY `author_id` (`author_id`),
-  ADD KEY `book_id` (`book_id`);
-
---
--- Indexes for table `book_genre`
---
-ALTER TABLE `book_genre`
-  ADD KEY `book_id` (`book_id`),
-  ADD KEY `genre_id` (`genre_id`);
-
---
--- Indexes for table `genre`
---
-ALTER TABLE `genre`
-  ADD KEY `id` (`id`) USING BTREE;
-
---
--- Indexes for table `loan`
---
-ALTER TABLE `loan`
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `book_id` (`book_id`),
-  ADD KEY `id` (`id`) USING BTREE;
-
---
--- Indexes for table `publisher`
---
-ALTER TABLE `publisher`
-  ADD KEY `id` (`id`) USING BTREE;
-
---
--- Indexes for table `reading_card`
---
-ALTER TABLE `reading_card`
-  ADD KEY `id` (`id`) USING BTREE;
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD KEY `reading_card_id` (`reading_card_id`),
-  ADD KEY `id` (`id`) USING BTREE;
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `authors`
---
-ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
--- AUTO_INCREMENT for table `book`
---
-ALTER TABLE `book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
--- AUTO_INCREMENT for table `genre`
---
-ALTER TABLE `genre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
-
---
--- AUTO_INCREMENT for table `loan`
---
-ALTER TABLE `loan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `publisher`
---
-ALTER TABLE `publisher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT for table `reading_card`
---
-ALTER TABLE `reading_card`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- Ограничения за дъмпнати таблици
---
-
---
--- Ограничения за таблица `book_author`
---
-ALTER TABLE `book_author`
-  ADD CONSTRAINT `book_author_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`);
-
---
--- Ограничения за таблица `book_genre`
---
-ALTER TABLE `book_genre`
-  ADD CONSTRAINT `book_genre_ibfk_2` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`);
-
---
--- Ограничения за таблица `loan`
---
-ALTER TABLE `loan`
-  ADD CONSTRAINT `loan_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
-
---
--- Ограничения за таблица `user`
---
-ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`reading_card_id`) REFERENCES `reading_card` (`id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO `loan` (`user_id`, `book_id`, `loan_date`, `return_period`, `is_returned`, `returned_on_date`, `id`) VALUES
+(23, 27, '2018-07-12', '2018-07-26', 1, '2018-07-12', 1),
+(24, 26, '2018-07-02', '2018-07-09', 1, '2018-07-12', 2),
+(24, 27, '2018-07-12', '2018-07-27', 0, NULL, 3),
+(23, 26, '2018-07-12', '2018-07-26', 0, NULL, 4),
+(23, 26, '2018-06-24', '2018-07-09', 1, '2018-07-12', 5),
+(24, 27, '2018-07-12', '2018-08-01', 1, '2018-07-12', 6),
+(23, 27, '2018-07-01', '2018-07-09', 1, '2018-07-12', 7),
+(24, 27, '2018-06-24', '2018-07-02', 1, '2018-07-12', 8);

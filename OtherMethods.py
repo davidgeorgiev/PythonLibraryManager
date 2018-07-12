@@ -4,8 +4,12 @@ import wx, wx.html
 class OtherMethods():
     def __init__(self,parent):
         self.parent = parent
-    def AddQuotes(self,in_sting):
-        return "\""+in_sting+"\""
+    def AddQuotes(self,in_string):
+        in_string = in_string.replace('"','')
+        in_string = in_string.replace("'","")
+        in_string = in_string.replace('\\','')
+        in_string = in_string.replace("/","")
+        return "\""+in_string+"\""
     def CheckIfSomeOfStringsInListIsEmpty(self,my_list,panel):
         for i in my_list:
             if (not i) or (i=='""'):
