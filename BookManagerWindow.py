@@ -6,7 +6,8 @@ from OtherMethods import OtherMethods
 from BookInfoWindow import BookInfoWindow
 
 class BookManagerWindow(wx.Frame):
-    def __init__(self,parent):
+    def __init__(self,parent,searching_list = None):
+        self.searching_list = searching_list
         self.myDataBaseConnector = DataBaseConnector(self)
         self.book_list = list()
         self.PopulateBooksList()
@@ -48,7 +49,10 @@ class BookManagerWindow(wx.Frame):
         wx.Frame.__init__(self, None, title=title, size=(460,380))
         self.Center()
     def PopulateBooksList(self):
-        self.book_list = self.myDataBaseConnector.GetAllBookIdsAndNames()
+        if(self.searching_list == None):
+            self.book_list = self.myDataBaseConnector.GetAllBookIdsAndNames()
+        else:
+            self.book_list = self.myDataBaseConnector.GetAllBookIdsAndNamesSearchByBookNameAndAuthorName(self.searching_list[0],self.searching_list[1])
     def GetNewChoiceField(self,panel,label,index,list_of_choices):
 		FirstBox = wx.BoxSizer(wx.HORIZONTAL)
 		m_text = wx.StaticText(panel, -1, label)

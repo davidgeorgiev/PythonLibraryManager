@@ -482,3 +482,11 @@ class DataBaseConnector():
                 number_of_negative+=1
         self.lastResult = number_of_negative
         return self.lastResult
+    def GetAllBookIdsAndNamesSearchByBookNameAndAuthorName(self,book_name,author_name):
+        all_books = list()
+        cur = self.db.cursor()
+        cur.execute('SELECT * FROM `book` WHERE book.title LIKE "%'+book_name+'%" AND book.id IN (SELECT book_author.book_id FROM book_author JOIN authors ON book_author.author_id = authors.id WHERE CONCAT(authors.first_name," ",authors.last_name) LIKE "%'+author_name+'%")')
+        for row in cur.fetchall():
+            all_books.append(str(row[0]).decode("utf8") +" "+ str(row[1]).decode("utf8"))
+        self.lastResult = all_books
+        return self.lastResult

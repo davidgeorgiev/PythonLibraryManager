@@ -14,6 +14,7 @@ from UserManagerWindow import UserManagerWindow
 from AuthorManagerWindow import AuthorManagerWindow
 from NewLoanWindow import NewLoanWindow
 from ReturnBookWindow import ReturnBookWindow
+from BookSearcherWindow import BookSearcherWindow
 import datetime
 
 
@@ -106,6 +107,8 @@ class Frame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.OnAddBook, m_add_book)
         m_book_manager = menu3.Append(wx.ID_ANY, "&Организатор".decode('utf8'), "Организатор на книгите".decode('utf8'))
         self.Bind(wx.EVT_MENU, self.OnManageBooks, m_book_manager)
+        m_search_book = menu3.Append(wx.ID_ANY, "&Търсене".decode('utf8'), "Потърси книга".decode('utf8'))
+        self.Bind(wx.EVT_MENU, self.OnSearchBook, m_search_book)
         menuBar.Append(menu3, "&Книги".decode('utf8'))
 
         menu4 = wx.Menu()
@@ -183,4 +186,7 @@ class Frame(wx.Frame):
         window.Show()
     def OnManageAuthors(self,event):
         window = AuthorManagerWindow(self)
+        window.Show()
+    def OnSearchBook(self,event):
+        window = BookSearcherWindow(self)
         window.Show()

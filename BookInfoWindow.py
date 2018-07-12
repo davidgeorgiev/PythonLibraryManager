@@ -91,9 +91,12 @@ class BookInfoWindow(wx.Frame):
             self.parent.parent.myFormatedInfoGetter.UpdateMainInfo()
             self.parent.parent.OnManageBooks(None)
         except:
-            self.parent.parent.parent.myFormatedInfoGetter.UpdateMainInfo()
-            self.parent.parent.parent.OnManageAuthors(None)
-            self.parent.parent.Destroy()
+            try:
+                self.parent.parent.parent.myFormatedInfoGetter.UpdateMainInfo()
+                self.parent.parent.parent.OnManageAuthors(None)
+                self.parent.parent.Destroy()
+            except:
+                pass
 
         self.parent.Destroy()
         self.Destroy()
