@@ -445,6 +445,17 @@ class DataBaseConnector():
                 pass
         self.lastResult = number_of_books_available_in_library
         return self.lastResult
+    def GetNumberOfBooksAvailableInLibraryWithBookId(self,book_id):
+        cur = self.db.cursor()
+        number_of_books_available_in_library = 0
+        cur.execute("SELECT SUM(book.number_of_copies)-(SELECT COUNT(*) FROM loan WHERE loan.is_returned = 0 and loan.book_id = "+str(book_id)+") FROM book WHERE id = "+str(book_id)+";")
+        for row in cur.fetchall():
+            try:
+                number_of_books_available_in_library = int(row[0])
+            except:
+                pass
+        self.lastResult = number_of_books_available_in_library
+        return self.lastResult
 
     def EditLoanOnReturningABook(self,id):
         cur = self.db.cursor()

@@ -39,7 +39,7 @@ class BookInfoWindow(wx.Frame):
         anotation_box.Add(self.anotation_input, 0, wx.ALL, 10)
         manager_box.Add(anotation_box, 0, wx.LEFT, 10)
         number_of_copies_box = wx.BoxSizer(wx.HORIZONTAL)
-        number_of_copies_label = wx.StaticText(panel, -1, "количество: ".decode('utf8')+self.book_full_info[4].decode('utf8'))
+        number_of_copies_label = wx.StaticText(panel, -1, "количество: ".decode('utf8')+str(self.myDataBaseConnector.GetNumberOfBooksAvailableInLibraryWithBookId(self.book_id))+"/"+self.book_full_info[4].decode('utf8'))
         number_of_copies_label.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL))
         number_of_copies_label.SetSize(number_of_copies_label.GetBestSize())
         number_of_copies_box.Add(number_of_copies_label, 0, wx.ALL, 10)
